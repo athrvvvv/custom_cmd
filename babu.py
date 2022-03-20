@@ -1,5 +1,5 @@
 import scheduler
-import file_manangement
+import file_management
 import cleaner
 import commands
 import password_generator
@@ -79,7 +79,7 @@ while True:
         startfile.open_word_folder()
     
     elif val == ("listw"):
-        file_manangement.listdir_word()
+        file_management.listdir_word()
 
     elif val == ("reopen"):
         startfile.restart_terminal()
@@ -106,7 +106,7 @@ while True:
         startfile.python()
     
     elif val == ("vsp"):
-        file_manangement.open_project_vs()
+        file_management.open_project_vs()
     
     elif val == ("time"):
         features.current_time()
@@ -118,16 +118,16 @@ while True:
         startfile.designer()
 
     elif val == ("uic"):
-        file_manangement.ui_to_py()
+        file_management.ui_to_py()
     
     elif val == ("nm"):
-        file_manangement.dummy_file()
+        file_management.dummy_file()
     
     elif val == ("npp"):
         startfile.npp()
 
     elif val == ("new dir"):
-        file_manangement.newfolder()
+        file_management.newfolder()
 
     elif val == ("pass"):
         password_generator.password()
@@ -163,7 +163,7 @@ while True:
         scheduler.tempo_timer()
     
     elif val == ("jupyter notebook"):
-        file_manangement.jupyternotebook_ml_mf()
+        file_management.jupyternotebook_ml_mf()
         
     elif val == ("clean bin"):
         cleaner.clean_bin()
@@ -175,7 +175,7 @@ while True:
         commands.introduction()
     
     elif val == ("ps"):
-        file_manangement.subproject()
+        file_management.subproject()
     
     elif val == ("yt"):
         startfile.youtubewa()
