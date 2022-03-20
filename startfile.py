@@ -1,5 +1,5 @@
 import os, sys
-from file_manangement import delete_dummy
+from file_management import delete_dummy
 import cleaner
 
 def dn_files():
