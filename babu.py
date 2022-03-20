@@ -5,7 +5,7 @@ import commands
 import password_generator
 import features
 import startfile
-import file_manangement
+import file_management
 import readline, os
 
 readline.set_completer(commands.completer.complete)
