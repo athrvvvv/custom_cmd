@@ -13,7 +13,7 @@ readline.parse_and_bind('tab: complete')
 space = " "
 print("Let's make this capable..♥")
 print("")
-#HELLO
+
 while True: 
     val01 = input("TYPE COMMAND:")
     val = val01.lower()
@@ -37,9 +37,6 @@ while True:
         startfile.shutdown()
 
     elif val == ("whatsapp"):    
-        print()
-        print("FUNCTION HAS BEEN RECOVERED :)")
-        print()
         startfile.whatsapp()
 
     elif val == ("ytw"):
