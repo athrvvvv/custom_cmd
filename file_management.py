@@ -159,8 +159,11 @@ def open_project_vs():
     # path = (r"C:\Users\athar\OneDrive\Documents\projects")
         elif input01 == "link":
             input02 = input("ENTER PATH: ")
-            os.system("start notepad++ "+input02)
-            completer_on()
+            if input02 == (""):
+                StopIteration()
+            else:
+                os.system("start notepad++ "+input02)
+                completer_on()
         else:
             isdir = os.path.isdir(path+"/"+input01)
             if isdir == (True):
