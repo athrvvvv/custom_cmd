@@ -148,10 +148,38 @@ def open_project_vs():
     completer = MyCompleter(list)
     readline.set_completer(completer.complete)
     readline.parse_and_bind('tab: complete')
-    input1 = input("FOLDER TO OPEN IN VS:")
+    input1 = input("FOLDER TO OPEN IN VS: ")
     if input1 == (""):
         completer_on()
         StopIteration
+    elif input1 == ("np"):
+        input01 = input("ENTER FOLDER TO OPEN: ")
+        if input01 == (""):
+            StopIteration()
+    # path = (r"C:\Users\athar\OneDrive\Documents\projects")
+        else:
+            isdir = os.path.isdir(path+"/"+input01)
+            if isdir == (True):
+                folder_origin = (path +"/"+input01)
+                list01 = os.listdir(folder_origin)
+                for filename in list01:
+                    print(filename)
+                completer = MyCompleter(list01)
+                readline.set_completer(completer.complete)
+                readline.parse_and_bind('tab: complete')
+                filename_to_open = input("ENTER FILE TO OPEN: ")
+                if filename_to_open == (""):
+                    StopIteration()
+                else:
+                    input_path = (folder_origin +"/"+ filename_to_open)
+                    check_file = os.path.isfile(input_path)
+                    if check_file == (True):
+                        os.system("start notepad++ "+input_path)
+                        completer_on()
+                        exit
+                    else:
+                        print("FALSE FILE NAME:(")
+                        completer_on()
     else:
         isdir = os.path.isdir(path+"/"+input1)
         completer_on()
@@ -188,12 +216,6 @@ def subproject():
         print("FALSE DIR")
         print()
         completer_on()
-
-def open_files_in_npp():
-    print("FUNCTION IN PROCESS:)")
-    #DERIVE SIMPLICITY
-    
-    
     
 
 
