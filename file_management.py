@@ -85,10 +85,15 @@ def listdir_word():
 #UI TO PY FILE CONVERSION
 def ui_to_py():
     #cwd = os.getcwd()+"/OneDrive\Documents\projects\custom_cmd/"+"/frontend/"
-    path, file_name = input("FILE PATH - FILE NAME:").split()
+    try:
+        path, file_name = input("FILE PATH - FILE NAME:").split()
+        os.system("pyuic5 -x "+'"'+path+"/"+file_name+".ui"+'"'+" -o "+'"'+path+"/"+file_name+".py"+'"')
+    except:
+        print("")
+        print("Something went wrong :(")
+        print()
+        pass
     
-    os.system("pyuic5 -x "+'"'+path+"/"+file_name+".ui"+'"'+" -o "+'"'+path+"/"+file_name+".py"+'"')
-
 #CREATE DUMMY PYTHON FILES
 def dummy_file():
     now = datetime.now()
@@ -141,28 +146,35 @@ def newfolder():
 def open_project_vs():
     path = (r"C:\Users\athar\OneDrive\Documents\projects")
     list = os.listdir(path)
-    print("")
+    print()
     for filename in list:
         print(filename)
-    print("")
+    print()
     completer = MyCompleter(list)
     readline.set_completer(completer.complete)
     readline.parse_and_bind('tab: complete')
     input1 = input("FOLDER TO OPEN IN VS: ")
     if input1 == (""):
         completer_on()
+        print()
         StopIteration
     elif input1 == ("np"):
+        print()
         input01 = input("ENTER FOLDER TO OPEN: ")
+        print()
         if input01 == (""):
             StopIteration()
     # path = (r"C:\Users\athar\OneDrive\Documents\projects")
         elif input01 == "link":
+            print()
             input02 = input("ENTER PATH: ")
+            print()
             if input02 == (""):
+                print()
                 StopIteration()
             else:
                 os.system("start notepad++ "+input02)
+                print()
                 completer_on()
         else:
             isdir = os.path.isdir(path+"/"+input01)
@@ -171,31 +183,39 @@ def open_project_vs():
                 list01 = os.listdir(folder_origin)
                 for filename in list01:
                     print(filename)
+                print()
                 completer = MyCompleter(list01)
                 readline.set_completer(completer.complete)
                 readline.parse_and_bind('tab: complete')
                 filename_to_open = input("ENTER FILE TO OPEN: ")
                 if filename_to_open == (""):
+                    print()
                     StopIteration()
                 else:
                     input_path = (folder_origin +"/"+ filename_to_open)
                     check_file = os.path.isfile(input_path)
                     if check_file == (True):
                         os.system("start notepad++ "+input_path)
+                        print()
                         completer_on()
                         exit
                     else:
+                        print()
                         print("FALSE FILE NAME:(")
+                        print()
                         completer_on()
     else:
         isdir = os.path.isdir(path+"/"+input1)
         completer_on()
         if isdir == (True):
             os.system("code "+path+"/"+input1)
+            print()
             completer_on()
             exit
         else:
+            print()
             print("FALSE FILE NAME:(")
+            print()
             completer_on()
     
 #JUPYTER NOTEBOOK
