@@ -36,26 +36,32 @@ def listdir_word():
     print("")
     for filename in filenames:
         print(filename)
+    print()
     completer = MyCompleter(filenames)
     readline.set_completer(completer.complete)
     readline.parse_and_bind('tab: complete')
+    print()
     ask_for_it = input("TYPE FILENAME: ")  
+    print()
     if ask_for_it == ("r "+ask_for_it.replace("r ","")):
         my_text = docx2txt.process(r'C:/Users/athar/OneDrive/Documents/word_docs/' + ask_for_it.replace("r ",""))
         print(my_text)
         completer_on()
         exit
-
     elif ask_for_it == (""):
         print("C'mon")
         completer_on()
+        print()
         exit
     
     elif ask_for_it == ("new"):
+        print()
         input01 = input("ENTER FILENAME: ")
+        print()
         #input02 = input("WANNA ADD HEADING: ")
         if input01 == (""):
             completer_on()
+            print()
             StopIteration()
         else:
             filepath = (r"C:\Users\athar\OneDrive\Documents\word_docs/"+input01+".docx")
@@ -65,8 +71,11 @@ def listdir_word():
             option = IS.getkey()
             if option == ("o"):
                 os.startfile(filepath)
+                print()
             else:
+                print()
                 print("EXIT")
+                print()
             completer_on()
         
 
