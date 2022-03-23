@@ -65,7 +65,7 @@ def files():
     os.system("explorer")
 
 def notepad():
-    os.system("notepad")
+    os.system("start notepad")
 
 def note_folder():
     os.startfile(r"C:\Users\athar\OneDrive\Documents\notes")
