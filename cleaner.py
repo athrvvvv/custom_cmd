@@ -1,4 +1,4 @@
-import os
+import os,winshell
 def clean_bin():
     #os.system("rd /s /q %systemdrive%\$Recycle.bin")
     #WITH DUST
