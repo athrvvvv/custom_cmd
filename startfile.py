@@ -14,12 +14,13 @@ def zoom1():
 def restart():
     os.system("shutdown /r /t 0")
     os.system("taskkill /im python.exe /f")
+    os._exit(1)
 
 def shutdown():
     delete_dummy()
     cleaner.clean_temp()
-    os.system("shutdown /s /t 2")
-    exit()
+    os.system("shutdown /s /t 0")
+    os._exit(1)
 
 def sleep1():
     os.system("shutdown /h ") 
