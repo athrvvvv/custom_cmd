@@ -13,7 +13,7 @@ readline.parse_and_bind('tab: complete')
 space = " "
 print("Let's make this capable..♥")
 print("")
-
+features.maximize()
 while True: 
     val01 = input("TYPE COMMAND:")
     val = val01.lower()
@@ -223,4 +223,5 @@ while True:
     elif val == ("day"):
         features.current_day()
     
-#HELLO
+    elif val == ("maximize"):
+        features.maximize()
