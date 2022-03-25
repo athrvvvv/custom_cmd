@@ -50,11 +50,11 @@ def pip():
     pip_work = input("")
     if "pip install" in pip_work:
         try:
-            pip_work.replace("pip install","")
-            internal_command = ("pip install " + pip_work)
-            os.system(internal_command)
+            os.system(pip_work)
         except:
             pass
+    elif pip_work == (""):
+        StopIteration()
     else:
         try:
             internal_command = ("pip install " + pip_work)
