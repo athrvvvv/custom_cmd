@@ -1,4 +1,5 @@
 import os,pyscreenshot, pygetwindow, time, psutil
+import pyautogui as bot
 from datetime import datetime
 
 def current_time():
@@ -80,3 +81,7 @@ def kill_selective_tasks():
     os.system("taskkill /f /im whatsapp.exe")
     os.system("taskkill /f /im telegram.exe")
     os.system("taskkill /f /im resso.exe")
+
+def maximize():
+    bot.press("f11")
+    
