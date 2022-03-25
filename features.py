@@ -47,7 +47,7 @@ def get_window_foreground():
 def cmd_command():
     input1 = input("COMMAND:")
     if input1 == (""):
-        StopIteration
+        StopIteration()
     else:
         try:
             os.system(input1)
