@@ -227,4 +227,4 @@ while True:
         features.maximize()
     
     elif val == ("script"):
-        startfile.open_script
+        startfile.script()
