@@ -172,6 +172,7 @@ def open_project_vs():
         input01 = input("ENTER FOLDER TO OPEN: ")
         print()
         if input01 == (""):
+            completer_on()
             StopIteration()
     # path = (r"C:\Users\athar\OneDrive\Documents\projects")
         elif input01 == "link":
