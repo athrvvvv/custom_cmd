@@ -25,7 +25,10 @@ def current_day():
 
 def kill_task():
     command = input("")
-    os.system("TASKKILL /F /IM "+command+".exe")
+    if command == (""):
+       StopIteration()
+    else:
+       os.system("TASKKILL /F /IM "+command+".exe")
 
 def ss():
     current = datetime.today()
