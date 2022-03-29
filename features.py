@@ -88,3 +88,16 @@ def kill_selective_tasks():
 def maximize():
     bot.press("f11")
     
+def opera_search():
+    file1 = open("readme.txt","r")
+    final_search = file1.read()
+    modify = final_search.split(' ')
+    modify_final = ("+".join(modify))
+    os.system("start opera https://www.google.com/search?q="+modify_final)
+
+def brave_search():
+    file1 = open("readme.txt","r")
+    final_search = file1.read()
+    modify = final_search.split(' ')
+    modify_final = ("+".join(modify))
+    os.system("start brave https://www.google.com/search?q="+modify_final)

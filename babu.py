@@ -228,3 +228,18 @@ while True:
     
     elif val == ("script"):
         startfile.script()
+    
+    elif val == ("fdm"):
+        startfile.fdm()
+    
+    elif (" bs") in val:
+        main_bs = val.replace(" bs","")
+        with open('readme.txt', 'w') as f:
+            f.write(main_bs)
+        features.brave_search()
+    
+    elif " os" in val:
+        main_os = val.replace(" os","")
+        with open('readme.txt', 'w') as f:
+            f.write(main_os)        
+        features.opera_search()
