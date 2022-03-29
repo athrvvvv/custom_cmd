@@ -6,7 +6,7 @@ import password_generator
 import features
 import startfile
 import file_management
-import readline, os
+import readline
 
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
