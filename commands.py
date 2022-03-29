@@ -48,8 +48,7 @@ def commandss():
         else:
             print('{:<10s}{:^12s}'.format(data[i][0],data[i][1]))
 
-def introduction():
-    print("Upcoming Ultra Super Powerful Artificial Intelligence.")
-    time.sleep(5)
-    os.system("cls")
+
+# print("Upcoming Ultra Super Powerful Artificial Intelligence.")
+
 
