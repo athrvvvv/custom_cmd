@@ -149,4 +149,7 @@ def print():
 def script():
     os.startfile(r"C:\Users\athar\OneDrive\Documents\word_docs\script.pdf")
 
+def fdm():
+    os.system("explorer shell:appsFolder\FreeDownloadManager")
+
 
