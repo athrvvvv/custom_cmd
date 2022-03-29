@@ -167,6 +167,36 @@ def open_project_vs():
         completer_on()
         print()
         StopIteration
+    elif (" np") in input1:
+        folder_name_np = input1.replace(" np","")
+        isdir = os.path.isdir(path+"/"+folder_name_np)
+        if isdir == (True):
+            folder_origin = (path +"/"+folder_name_np)
+            list01 = os.listdir(folder_origin)
+            for filename in list01:
+                print(filename)
+            print()
+            completer = MyCompleter(list01)
+            readline.set_completer(completer.complete)
+            readline.parse_and_bind('tab: complete')
+            filename_to_open = input("ENTER FILE TO OPEN: ")
+            if filename_to_open == (""):
+                print()
+                StopIteration()
+            else:
+                input_path = (folder_origin +"/"+ filename_to_open)
+                check_file = os.path.isfile(input_path)
+                if check_file == (True):
+                    os.system("start notepad++ "+input_path)
+                    print()
+                    completer_on()
+                    exit
+                else:
+                    print()
+                    print("FALSE FILE NAME:(")
+                    print()
+                    completer_on()
+        
     elif input1 == ("np"):
         print()
         input01 = input("ENTER FOLDER TO OPEN: ")
