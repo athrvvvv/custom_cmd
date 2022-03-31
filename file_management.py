@@ -182,20 +182,58 @@ def open_project_vs():
             filename_to_open = input("ENTER FILE TO OPEN: ")
             if filename_to_open == (""):
                 print()
-                StopIteration()
-            else:
-                input_path = (folder_origin +"/"+ filename_to_open)
-                check_file = os.path.isfile(input_path)
-                if check_file == (True):
-                    os.system("start notepad++ "+input_path)
-                    print()
-                    completer_on()
-                    exit
+                StopIteration()   
+            elif filename_to_open == ("f"):
+                isdir = os.path.isdir(path+"/"+folder_name_np)
+                if isdir == (True):
+                    folder_origin = (path +"/"+folder_name_np)   
+                    os.system("start notepad++ "+folder_origin)
                 else:
                     print()
                     print("FALSE FILE NAME:(")
                     print()
-                    completer_on()
+                    completer_on() 
+            else:
+                check_file = os.path.isfile(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\open_file_npp.txt")
+                if check_file == (False):
+                    os.system("echo> "+r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\open_file_npp.txt")
+                with open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\open_file_npp.txt", 'w') as writer:
+                    writer.write(" "+filename_to_open)
+                with open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\open_file_npp.txt", 'r') as writer:
+                    number_of_files = 0
+                    data = writer.read()
+                    lines = data.split()
+                    number_of_files += len(lines)
+                    if number_of_files == (1):
+                        print("1 FILE DETECTED")
+                        input_path = (folder_origin +"/"+ filename_to_open)
+                        check_file = os.path.isfile(input_path) 
+                        if check_file == (True):
+                            os.system("start notepad++ "+input_path)
+                            print()
+                            completer_on()
+                            exit
+                        else:
+                            print()
+                            print("FALSE FILE NAME:(")
+                            print()
+                            completer_on()                                         
+                    else:
+                        print(number_of_files,"FILES DETECTED")
+                        with open (r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\open_file_npp.txt", 'r') as replace_file:
+                            slash = "/"
+                            path = r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd"+slash
+                            reading = replace_file.read()
+                            replacing = reading.replace(" ",(" "+path))
+                        with open (r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\open_file_npp.txt", 'w') as write_file:
+                            write_file.write(replacing)
+                        data_in_file = open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\open_file_npp.txt", 'r')
+                        reading_data = data_in_file.read()
+                        os.system("start notepad++ "+reading_data)
+                        print()
+        
+                        
+        completer_on()
         
     elif input1 == ("np"):
         print()
