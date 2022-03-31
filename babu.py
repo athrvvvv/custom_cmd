@@ -69,7 +69,9 @@ while True:
     elif val == ("commands"):
         commands.commandss()
 
-    elif val == ("pip"):
+    elif "pip " in val:
+        with open("open_file_npp.txt","w") as f:
+            f.write(val)   
         startfile.pip()
 
     elif val == ("wd"):
