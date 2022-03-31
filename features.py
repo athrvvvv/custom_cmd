@@ -89,15 +89,21 @@ def maximize():
     bot.press("f11")
     
 def opera_search():
-    file1 = open("readme.txt","r")
+    file1 = open("search.txt","r")
     final_search = file1.read()
-    modify = final_search.split(' ')
-    modify_final = ("+".join(modify))
-    os.system("start opera https://www.google.com/search?q="+modify_final)
+    if ".com" in final_search:
+        os.system("start opera "+final_search)
+    else:
+        modify = final_search.split(' ')
+        modify_final = ("+".join(modify))
+        os.system("start opera https://www.google.com/search?q="+modify_final)
 
 def brave_search():
-    file1 = open("readme.txt","r")
+    file1 = open("search.txt","r")
     final_search = file1.read()
-    modify = final_search.split(' ')
-    modify_final = ("+".join(modify))
-    os.system("start brave https://www.google.com/search?q="+modify_final)
+    if ".com" in final_search:
+        os.system("start brave "+final_search)
+    else:
+        modify = final_search.split(' ')
+        modify_final = ("+".join(modify))
+        os.system("start brave https://www.google.com/search?q="+modify_final)
