@@ -117,4 +117,8 @@ def check_empty_command():
         read = f.read()
         len_read = len(read)
         if len_read == (100) or len_read > (100):
+            print()
+            print("EXITING...")
+            print()
+            time.sleep(3)
             exit()
