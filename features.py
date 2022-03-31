@@ -49,7 +49,7 @@ def get_window_foreground():
         print("WHAT THE F**K.., you asking about!??")
 
 def cmd_command():
-    input1 = input("COMMAND:")
+    input1 = input("CMD COMMAND:")
     if input1 == (""):
         StopIteration()
     else:

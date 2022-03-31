@@ -48,18 +48,13 @@ def clear_console():
     os.system('cls')
 
 def pip():
-    pip_work = input("")
-    if "pip install" in pip_work:
-        try:
-            os.system(pip_work)
-        except:
-            pass
-    elif pip_work == (""):
+    with open("open_file_npp.txt","r") as f:
+        in_text = f.read()
+    if in_text == ("pip "):
         StopIteration()
     else:
         try:
-            internal_command = ("pip install " + pip_work)
-            os.system(internal_command)
+            os.system(in_text)
         except:
             pass
 
