@@ -23,7 +23,8 @@ def shutdown():
     os._exit(1)
 
 def sleep1():
-    os.system("shutdown /h ") 
+    cleaner.clean_temp()  
+    os.system("shutdown /h") 
     
 def whatsapp():
     os.system("start whatsapp://send?phone=")
@@ -151,5 +152,8 @@ def script():
 
 def fdm():
     os.system("explorer shell:appsFolder\FreeDownloadManager")
+
+def vsdc():
+    os.system("explorer shell:appsFolder\{6D809377-6AF0-444B-8957-A3773F02200E}\FlashIntegro\VideoEditor\VideoEditor.exe")
 
 

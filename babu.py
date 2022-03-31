@@ -13,11 +13,11 @@ readline.parse_and_bind('tab: complete')
 space = " "
 print("Let's make this capable..♥")
 print("")
-features.maximize()
+
 while True: 
     val01 = input("TYPE COMMAND:")
     val = val01.lower()
-
+    
     if val == ("cls"):
         startfile.clear_console()
 
@@ -243,3 +243,6 @@ while True:
         with open('readme.txt', 'w') as f:
             f.write(main_os)        
         features.opera_search()
+    
+    elif val == ("vsdc"):
+        startfile.vsdc()
