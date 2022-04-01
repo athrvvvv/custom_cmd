@@ -15,6 +15,7 @@ print("Let's make this capable..♥")
 print("")
 features.maximize()
 features.clear_command_history()
+
 while True: 
     val01 = input("TYPE COMMAND:")
     val = val01.lower()
