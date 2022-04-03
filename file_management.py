@@ -259,18 +259,38 @@ def subproject():
     completer = MyCompleter(filenames)
     readline.set_completer(completer.complete)
     readline.parse_and_bind('tab: complete')
-    input1 = input("FILE NAME:")
-    a = (r"C:\Users\athar\OneDrive\Documents\projects/"+input1)
-    check_dir = os.path.isdir(a)
-    if check_dir == (True):
-        os.startfile(a)
-        print()
+    input1 = input("COMMAND: ")
+    if ("clean ") in input1:
+        temp = input1.replace("clean ","")
+        a = (r"%userprofile%\OneDrive\Documents\projects\\"+temp+"\\")
+        b = (r"C:\Users\athar\OneDrive\Documents\projects/"+temp)
+        check_dir = os.path.isdir(b)
+        if check_dir == (True):
+            os.system("del "+a+"*.bak")
+            #ADD VERIFICATION OF __pycache__
+            os.system("del /s /q "+a+"__pycache__")
+            os.system("rmdir "+a+"__pycache__")
+            completer_on()
+        else:
+            print()
+            print("FALSE DIR")
+            print()
+            completer_on()
+    elif input1 == (""):
+        os.system("start " r"C:\Users\athar\OneDrive\Documents\projects")
         completer_on()
     else:
-        print()
-        print("FALSE DIR")
-        print()
-        completer_on()
+        a = (r"C:\Users\athar\OneDrive\Documents\projects/"+input1)
+        check_dir = os.path.isdir(a)
+        if check_dir == (True):
+            os.startfile(a)
+            print()
+            completer_on()
+        else:
+            print()
+            print("FALSE DIR")
+            print()
+            completer_on()
     
 
 
