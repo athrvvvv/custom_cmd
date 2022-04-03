@@ -15,6 +15,7 @@ print("Let's make this capable..♥")
 print("")
 features.maximize()
 features.clear_command_history()
+features.del_greet_file()
 features.greet()
 while True: 
     val01 = input("TYPE COMMAND:")
