@@ -260,8 +260,8 @@ def subproject():
     readline.set_completer(completer.complete)
     readline.parse_and_bind('tab: complete')
     input1 = input("COMMAND: ")
-    if ("clean ") in input1:
-        temp = input1.replace("clean ","")
+    if (" clean") in input1:
+        temp = input1.replace(" clean","")
         a = (r"%userprofile%\OneDrive\Documents\projects\\"+temp+"\\")
         b = (r"C:\Users\athar\OneDrive\Documents\projects/"+temp)
         check_dir = os.path.isdir(b)
@@ -279,6 +279,30 @@ def subproject():
     elif input1 == (""):
         os.system("start " r"C:\Users\athar\OneDrive\Documents\projects")
         completer_on()
+    elif " cmd" in input1:
+        temp = input1.replace(" cmd","")
+        b = (r"C:\Users\athar\OneDrive\Documents\projects/"+temp)
+        check_file = os.path.exists(b)
+        if check_file == (True):
+            os.system("start cmd /K cd "+b)
+            completer_on()
+        else:
+            print()
+            print("FALSE DIR")
+            print()
+            completer_on()
+    elif " git" in input1:
+        temp = input1.replace(" git","")
+        b = (r"C:\Users\athar\OneDrive\Documents\projects/"+temp)
+        check_file = os.path.exists(b)
+        if check_file == (True):
+            os.popen(('"'+"C:\Program Files\Git\git-bash.exe"+'" '+"--cd="+'"'+b+'"'))
+            completer_on()
+        else:
+            print()
+            print("FALSE DIR")
+            print()
+            completer_on()
     else:
         a = (r"C:\Users\athar\OneDrive\Documents\projects/"+input1)
         check_dir = os.path.isdir(a)
