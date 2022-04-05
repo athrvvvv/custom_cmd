@@ -1,10 +1,11 @@
-import os
+import os, readline
 import WConio2 as IS
 from datetime import date
 import time, datetime
+import commands
 now = date.today()
 str_today = str(now)
-
+ 
 def priority_list():
     check_file = os.path.isfile(r"C:\Users\athar\OneDrive\Documents\projects\hidden_works\priority_list.txt")
     if check_file == (False):
@@ -142,39 +143,4 @@ def roadmap():
             with open(r"C:\Users\athar\OneDrive\Documents\projects\hidden_works\roadmap.txt", "a") as np_file:
                 np_file.write(input0+ "\n")
 
-# def tempo_timer():
-#     input1,input2 = input("ENTER TIMER (HH:MM): ").split()
-#     check_file = os.path.isfile(r"C:\Users\athar\OneDrive\Documents\projects\hidden_works\quick_note.txt")
-#     if check_file == (False):
-#         os.system("echo> tempo_timer.pyw")
-#     with open(r"C:\Users\athar\OneDrive\Documents\projects\hidden_works\tempo_timer.py", "w") as np_file:
-#             np_file.write("from datetime import datetime"+"\n"+"import pygetwindow"+"\n"+"from playsound import playsound"+"\n"+"from win10toast import ToastNotifier"+"\n"+"win = pygetwindow.getWindowsWithTitle"+"("+'"'+"py.exe"+'"'+")"+"[0]"+"\n"+"win.activate()"+"\n"+"n = ToastNotifier()"+"\n"+"while True:"+"\n"+"    "+"now "+ "=" +" datetime.now()"+"\n"+"    "+"now_current "+ "="+ " now.strftime"+"("+'"'+"%I:%M "+'"'+")"+"\n"+"    "+"now_p = "+ "now.strftime"+"("+'"'+"%p"+'"'+")"+"\n"+"    "+"if now_current <= " +"("+'"'+input1+":"+input2+'"'+"+"+" now_p"+")"+":"+"\n"+"       "+"playsound"+"("+"r"+'"'+r"C:\Users\athar\Music\music\sage_ringtone.mp3"+'"'+")"+"\n"+"       ")
-
-def countdown(h, m, s):
- 
-    # Calculate the total number of seconds
-    total_seconds = h * 3600 + m * 60 + s
- 
-    # While loop that checks if total_seconds reaches zero
-    # If not zero, decrement total time by one second
-    while total_seconds > 0:
- 
-        # Timer represents time left on countdown
-        timer = datetime.timedelta(seconds = total_seconds)
-        
-        # Prints the time left on the timer
-        print(timer, end="\r")
- 
-        # Delays the program one second
-        time.sleep(1)
- 
-        # Reduces total time by one second
-        total_seconds -= 1
- 
-    print("Bzzzt! The countdown is at zero seconds!")
- 
-    # Inputs for hours, minutes, seconds on timer
-    h = input("Enter the time in hours: ")
-    m = input("Enter the time in minutes: ")
-    s = input("Enter the time in seconds: ")
-    # countdown(int(h), int(m), int(s))
+            
