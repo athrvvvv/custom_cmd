@@ -3,7 +3,7 @@ from datetime import datetime
 import WConio2 as input_source
 import docx, docx2txt
 import commands
-import WConio2 as IS
+import tracking_master
 doc = docx.Document()
 
 class MyCompleter(object):
@@ -24,6 +24,8 @@ class MyCompleter(object):
             
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
+
+main_path = (os.path.dirname(__file__))
 
 #FUNCTION FOR CYCLE OF COMPLETER :)
 def completer_on():
@@ -68,7 +70,7 @@ def listdir_word():
             #doc.add_heading(input02, 0)
             doc.save(filepath)
             print("OPEN (O) EXIT ()")
-            option = IS.getkey()
+            option = input_source.getkey()
             if option == ("o"):
                 os.startfile(filepath)
                 print()
@@ -256,7 +258,7 @@ def subproject():
                     if check_file_exists == (False):
                         os.system("echo "+'"'+"Happy Coding :)"+'"'+">>" +path_of_file)
                         print("OPEN (O) EXIT ()")
-                        to_do = IS.getkey()
+                        to_do = input_source.getkey()
                         if to_do == ("o"):
                             os.system("start code "+path_of_file)
                         else:
@@ -304,7 +306,17 @@ def subproject():
                         os.system("code "+reading_data)
                         print()                                
         completer_on()
-
+    # Track projects shortcut
+    elif (" -track") in input1:
+        to_track = input1.replace(' -track','')
+        check_to_track = os.path.exists(os.path.join(path,to_track))
+        if check_to_track == (False):
+            print(os.path.join(path,to_track) + 'is FALSE DIR')
+        else:
+            input_to_tarck = open(os.path.join(main_path,'tracker','track_on.txt'),'w')
+            input_to_tarck.write(to_track)
+            tracking_master.count_on()
+        completer_on()
     # OPENS ANY FILES/DIR IN NPP 
     elif (" np") in input1:
         folder_name_np = input1.replace(" np","")
@@ -342,7 +354,7 @@ def subproject():
                     if check_file_exists == (False):
                         os.system("echo "+'"'+"Happy Coding :)"+'"'+">>" +path_of_file)
                         print("OPEN (O) EXIT ()")
-                        to_do = IS.getkey()
+                        to_do = input_source.getkey()
                         if to_do == ("o"):
                             os.system("start notepad++ "+path_of_file)
                         else:
