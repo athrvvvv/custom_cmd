@@ -188,6 +188,7 @@ def subproject():
         os.system("start " r"C:\Users\athar\OneDrive\Documents\projects")
         completer_on()
     elif input1 == ("q"):
+        completer_on()
         StopIteration()
     # OPENS CMD IN SPECIFIC DIR
     elif " cmd" in input1:
@@ -314,7 +315,7 @@ def subproject():
             print(os.path.join(path,to_track) + 'is FALSE DIR')
         else:
             input_to_tarck = open(os.path.join(main_path,'tracker','track_on.txt'),'w')
-            input_to_tarck.write(to_track)
+            input_to_tarck.write(to_track+'.txt')
             tracking_master.count_on()
         completer_on()
     # OPENS ANY FILES/DIR IN NPP 
