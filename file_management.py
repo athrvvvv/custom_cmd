@@ -34,6 +34,7 @@ def completer_on():
 
 #LIST OF WORD DOCUMENTS
 def listdir_word():
+    # Input from User
     filenames = os.listdir(r"C:\Users\athar\OneDrive\Documents\word_docs")
     print("")
     for filename in filenames:
@@ -415,14 +416,3 @@ def subproject():
             print("FALSE DIR")
             print()
             completer_on()
-    
-
-
-
-
-
-    
-
-
-
-    

@@ -1,5 +1,3 @@
-import os, time
-
 class MyCompleter(object):
     def __init__(self, options):
         self.options = sorted(options)
@@ -47,8 +45,3 @@ def commandss():
             print(dash)
         else:
             print('{:<10s}{:^12s}'.format(data[i][0],data[i][1]))
-
-
-# print("Upcoming Ultra Super Powerful Artificial Intelligence.")
-
-
