@@ -1,0 +1,12 @@
+cx_Freeze
+docx
+docx2txt
+psutil
+pygetwindow
+pyperclip
+PyQt5
+pyscreenshot
+sympy
+WConio2
+winshell
+pyreadline
