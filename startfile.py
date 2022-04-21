@@ -5,7 +5,7 @@ import cleaner
 def dn_files():
     os.system("start %userprofile%\Downloads")
 
-def zoom1():
+def zoom():
     os.startfile("C:\\Users\\athar\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe")
 
 def restart():
@@ -96,9 +96,6 @@ def designer():
 
 def npp():
     os.system("start notepad++")
-
-def zoom():
-    os.startfile(r"C:\Users\athar\OneDrive\Documents\projects\zoom_bot\main.py")
 
 def open_resso():
     os.system(r" start C:\Users\athar\AppData\Local\Programs\Resso\Resso.exe")
