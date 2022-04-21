@@ -5,9 +5,8 @@ import commands
 import password_generator
 import features
 import startfile
-import file_management
-import readline
 import tracking_master  
+import readline
 import os
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
@@ -30,7 +29,7 @@ main_path = os.path.dirname(__file__)
 
 while True: 
     val01 = input("TYPE COMMAND:")
-    val = val01.lower()
+    val = val01.lower().strip()
     features.check_empty_command()
     if val == ("cls"):
         startfile.clear_console()

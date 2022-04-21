@@ -2,6 +2,7 @@ import os, readline
 from datetime import datetime
 import WConio2 as input_source
 import docx, docx2txt
+from sympy import ask
 import commands
 import tracking_master
 doc = docx.Document()
@@ -56,7 +57,9 @@ def listdir_word():
         completer_on()
         print()
         exit
-    
+    elif ask_for_it == ("wd"):
+        os.system(r"start C:\Users\athar\OneDrive\Documents\word_docs")
+        completer_on()
     elif ask_for_it == ("new"):
         print()
         input01 = input("ENTER FILENAME: ")

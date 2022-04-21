@@ -18,7 +18,7 @@ completer = MyCompleter(["brave","battery percent","signal","click","telegram","
 "restart","sleep","shutdown","youtube","word","gimp",
 "files","projects","listw",
 "reopen","opera","telegram","python","time","date",
-"new dir","zoom","music","cmd command","priority list","github.com/athrvvvv/reader-pro","roadmap","documents", "pass", "quick note","jupyter notebook","clean bin","day","maximize","script","vsdc","tracker","BRAVE","BATTERY PERCENT","SIGNAL","CLICK","TELEGRAM","PHOTOS","WHATSAPP","CLOSE","TWITTER","TEMP","MESSAGES","CALENDAR","COMMANDS", "ZOOM", "RESTART","SLEEP","SHUTDOWN","YOUTUBE","WORD","GIMP", "FILES","PROJECTS","LISTW", "REOPEN","OPERA","TELEGRAM","PYTHON","TIME","DATE", "NEW DIR","ZOOM","MUSIC","CMD COMMAND","PRIORITY LIST", "ROADMAP","DOCUMENTS", "PASS", "QUICK NOTE","JUPYTER NOTEBOOK","CLEAN BIN","DAY","MAXIMIZE","SCRIPT","VSDC","TRACKER"])
+"new dir","zoom","music","cmd command","priority list","github.com/athrvvvv","roadmap","documents", "pass", "quick note","jupyter notebook","clean bin","day","maximize","script","vsdc","tracker","BRAVE","BATTERY PERCENT","SIGNAL","CLICK","TELEGRAM","PHOTOS","WHATSAPP","CLOSE","TWITTER","TEMP","MESSAGES","CALENDAR","COMMANDS", "ZOOM", "RESTART","SLEEP","SHUTDOWN","YOUTUBE","WORD","GIMP", "FILES","PROJECTS","LISTW", "REOPEN","OPERA","TELEGRAM","PYTHON","TIME","DATE", "NEW DIR","ZOOM","MUSIC","CMD COMMAND","PRIORITY LIST", "ROADMAP","DOCUMENTS", "PASS", "QUICK NOTE","JUPYTER NOTEBOOK","CLEAN BIN","DAY","MAXIMIZE","SCRIPT","VSDC","TRACKER"])
 
 def commandss():
     data = [['KEY', 'USES'],
