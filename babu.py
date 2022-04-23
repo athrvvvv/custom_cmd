@@ -11,8 +11,8 @@ import os
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
 space = " "
-print("Let's make this capable..♥")
-print("")
+# print("Let's make this capable..♥")
+# print("")
 
 # MAXIMISES PROGRAM 
 features.maximize()

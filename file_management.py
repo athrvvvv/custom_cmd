@@ -50,23 +50,14 @@ def listdir_word():
     if ask_for_it == ("r "+ask_for_it.replace("r ","")):
         my_text = docx2txt.process(r'C:/Users/athar/OneDrive/Documents/word_docs/' + ask_for_it.replace("r ",""))
         print(my_text)
-        completer_on()
-        exit
     elif ask_for_it == (""):
-        print("C'mon")
-        completer_on()
-        print()
-        exit
-    elif ask_for_it == ("wd"):
         os.system(r"start C:\Users\athar\OneDrive\Documents\word_docs")
-        completer_on()
     elif ask_for_it == ("new"):
         print()
         input01 = input("ENTER FILENAME: ")
         print()
         #input02 = input("WANNA ADD HEADING: ")
         if input01 == (""):
-            completer_on()
             print()
             StopIteration()
         else:
@@ -82,7 +73,6 @@ def listdir_word():
                 print()
                 print("EXIT")
                 print()
-            completer_on()
         
 
     else:
@@ -95,7 +85,7 @@ def listdir_word():
             os.startfile(input_path)
         else:
             print("FALSE FILE :(")
-        completer_on()
+    completer_on()
        
 #UI TO PY FILE CONVERSION
 def ui_to_py():
