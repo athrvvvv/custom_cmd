@@ -1,7 +1,8 @@
 import os,pyscreenshot, pygetwindow, time, psutil
+import importlib
 from datetime import datetime, date, timedelta
-import win32gui, win32con
-
+import win32gui, win32con, win32api ,keyboard, pyautogui
+import file_management
 main_path = (os.path.dirname(__file__))
 profile = os.environ['USERPROFILE']
 def current_time():
@@ -185,3 +186,17 @@ def check_dir():
         open(os.path.join(main_path,'tracker','status.txt'),'a').close()
     if istrack_on == (False):
         open(os.path.join(main_path,'tracker','track_on.txt'),'a').close()
+
+def refresh_x(self):
+    win32api.keybd_event(0x5B, 0, ) # LWIN
+    win32api.keybd_event(0x44, 0, ) # D
+    for i in range (self):
+        keyboard.send("F5")
+        time.sleep(0.2)
+    pyautogui.hotkey("win","d")
+
+def reload_modules():
+    # for file in os.listdir(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd"):
+    #     if file.endswith(".py"):
+    #         print(file.replace(".py",""))
+    importlib.reload(file_management)

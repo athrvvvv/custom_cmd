@@ -1,8 +1,6 @@
-import os, readline
-import WConio2 as IS
+import os
+import WConio2 as input_source
 from datetime import date
-import time, datetime
-import commands
 now = date.today()
 str_today = str(now)
  
@@ -41,7 +39,7 @@ def priority_list():
         elif input0 == ("cls"):
             print("CLEAR THE ENTIRE CONTENT OF FILE..?")
             print("YES (Y) or NO (N)")
-            confirmation = IS.getkey()
+            confirmation = input_source.getkey()
             if confirmation == ("n") or confirmation == ("n"):
                 priority_list()
    
@@ -86,7 +84,7 @@ def quick_note():
         elif input0 == ("cls"):
             print("CLEAR THE ENTIRE CONTENT OF FILE..?")
             print("YES (Y) or NO (N)")
-            confirmation = IS.getkey()
+            confirmation = input_source.getkey()
             if confirmation == ("n") or confirmation == (""):
                 quick_note()
    
@@ -131,7 +129,7 @@ def roadmap():
         elif input0 == ("cls"):
             print("CLEAR THE ENTIRE CONTENT OF FILE..?")
             print("YES (Y) or NO (N)")
-            confirmation = IS.getkey()
+            confirmation = input_source.getkey()
             if confirmation == ("n") or confirmation == (""):
                 roadmap()
             

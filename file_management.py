@@ -2,7 +2,6 @@ import os, readline
 from datetime import datetime
 import WConio2 as input_source
 import docx, docx2txt
-from sympy import ask
 import commands
 import tracking_master
 doc = docx.Document()
@@ -89,10 +88,10 @@ def listdir_word():
        
 #UI TO PY FILE CONVERSION
 def ui_to_py():
-    #cwd = os.getcwd()+"/OneDrive\Documents\projects\custom_cmd/"+"/frontend/"
     try:
         path, file_name = input("FILE PATH - FILE NAME:").split()
-        os.system("pyuic5 -x "+'"'+path+"/"+file_name+".ui"+'"'+" -o "+'"'+path+"/"+file_name+".py"+'"')
+        if ".ui" in file_name:
+            os.system("pyuic5 -x "+'"'+path+"/"+file_name+".ui"+'"'+" -o "+'"'+path+"/"+file_name+".py"+'"')
     except:
         print("")
         print("Something went wrong :(")

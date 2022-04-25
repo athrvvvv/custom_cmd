@@ -8,6 +8,7 @@ import startfile
 import tracking_master  
 import readline
 import os
+
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
 # MAXIMISES PROGRAM 
@@ -26,7 +27,7 @@ main_path = os.path.dirname(__file__)
 while True: 
     # val01 = input("TYPE COMMAND:")
     val01 = input("TYPE IN HERE:")
-    val02 = val01.lower().strip()
+    val02 = val01.lower()
     val = ''.join(e for e in val02 if e.isalnum())
     features.check_empty_command()
     if val == ("cls"):

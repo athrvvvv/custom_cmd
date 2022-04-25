@@ -1,5 +1,5 @@
 import os, sys
-from file_management import delete_dummy
+import file_management
 import cleaner
 
 def dn_files():
@@ -14,7 +14,7 @@ def restart():
     os._exit(1)
 
 def shutdown():
-    delete_dummy()
+    file_management.delete_dummy()
     cleaner.clean_temp()
     os.system("shutdown /s /t 0")
     os._exit(1)
