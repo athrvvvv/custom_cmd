@@ -8,7 +8,6 @@ import startfile
 import tracking_master  
 import readline
 import os, re, importlib
-
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
 # MAXIMISES PROGRAM 
@@ -146,19 +145,19 @@ while True:
     elif val == ("fg"):
         features.get_window_foreground()
     
-    elif val == ("cmdcommand"):
+    elif val == ("cmd command"):
         features.cmd_command()
     
-    elif val == ("prioritylist"):
+    elif val == ("priority list"):
         scheduler.priority_list()
     
     elif val == ("documents"):
         startfile.documents()
     
-    elif val == ("quicknote"):
+    elif val == ("quick note"):
         scheduler.quick_note()
        
-    elif val == ("cleanbin"):
+    elif val == ("clean bin"):
         cleaner.clean_bin()
 
     elif val == ("roadmap"):
