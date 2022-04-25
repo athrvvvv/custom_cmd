@@ -27,8 +27,7 @@ main_path = os.path.dirname(__file__)
 while True: 
     # val01 = input("TYPE COMMAND:")
     val01 = input("TYPE IN HERE:")
-    val02 = val01.lower()
-    val = re.sub(r'[^a-zA-Z]', '', val02)
+    val = val01.lower().strip()
     features.check_empty_command()
     if val == ("cls"):
         startfile.clear_console()
@@ -252,7 +251,8 @@ while True:
         tracking_master.tracker()
     
     elif "x" in val:
-        ans = int(val.replace("x",""))
+        answer = val.replace("x","")
+        ans = int(answer)
         features.refresh_x(ans)
     
     elif val == ("re"):
