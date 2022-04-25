@@ -160,7 +160,7 @@ while True:
         scheduler.quick_note()
        
     elif val == ("cleanbin"):
-        print(val)
+        cleaner.clean_bin()
 
     elif val == ("roadmap"):
         scheduler.roadmap()
