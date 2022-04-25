@@ -8,3 +8,5 @@ def clean_bin():
 
 def clean_temp():
     os.system("del /s /q "+r"%userprofile%\AppData\Local\Temp")
+
+    

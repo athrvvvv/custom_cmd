@@ -1,3 +1,4 @@
+from fileinput import filename
 import os, readline
 from datetime import datetime
 import WConio2 as input_source
@@ -73,7 +74,6 @@ def listdir_word():
                 print("EXIT")
                 print()
         
-
     else:
         completer = MyCompleter(filenames)
         readline.set_completer(completer.complete)
@@ -91,7 +91,18 @@ def ui_to_py():
     try:
         path, file_name = input("FILE PATH - FILE NAME:").split()
         if ".ui" in file_name:
-            os.system("pyuic5 -x "+'"'+path+"/"+file_name+".ui"+'"'+" -o "+'"'+path+"/"+file_name+".py"+'"')
+            file_name1 = file_name.replace(".ui","")
+            check_file = os.path.exists(os.path.join(path,file_name))
+            if check_file == (True):
+                os.system("pyuic5 -x "+'"'+path+"/"+file_name1+".ui"+'"'+" -o "+'"'+path+"/"+file_name1+".py"+'"')
+            else:
+                print("FILE DOES'NT EXISTS")
+        else:
+            check_file = os.path.exists(os.path.join(path,file_name+".ui"))
+            if check_file == (True):
+                os.system("pyuic5 -x "+'"'+path+"/"+file_name+".ui"+'"'+" -o "+'"'+path+"/"+file_name+".py"+'"')
+            else:
+                print("FILE DOES'NT EXISTS")
     except:
         print("")
         print("Something went wrong :(")

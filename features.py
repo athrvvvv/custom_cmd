@@ -1,8 +1,6 @@
 import os,pyscreenshot, pygetwindow, time, psutil
-import importlib
 from datetime import datetime, date, timedelta
 import win32gui, win32con, win32api ,keyboard, pyautogui
-import file_management
 main_path = (os.path.dirname(__file__))
 profile = os.environ['USERPROFILE']
 def current_time():
@@ -195,8 +193,3 @@ def refresh_x(self):
         time.sleep(0.2)
     pyautogui.hotkey("win","d")
 
-def reload_modules():
-    # for file in os.listdir(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd"):
-    #     if file.endswith(".py"):
-    #         print(file.replace(".py",""))
-    importlib.reload(file_management)

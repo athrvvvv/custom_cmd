@@ -63,14 +63,14 @@ def open_word_folder():
     os.startfile(r"C:\Users\athar\OneDrive\Documents\word_docs")
     
 def restart_terminal():
-    os.system("start babu")
+    os.startfile(r"C:\Users\athar\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\babu.bat")
     sys.exit("BYEEEE")
 
 def your_path():
     os.startfile(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd")
 
 def open_current_in_cmd():
-    os.system("start babu")
+    os.startfile(r"C:\Users\athar\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\babu.bat")
 
 def open_cmd():
     os.system("cmd")
