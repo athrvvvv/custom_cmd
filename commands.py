@@ -24,17 +24,14 @@ def commandss():
     data = [['KEY', 'USES'],
             ['REOPEN','REOPENS CUSTOM_CMD'],
             ['OPCMD','OPENS ANOTHER CUSTOM_CMD'],
-            ['VSP','OPEN FOLDER IN VSCODE'],
+            ['PS','PROJECT MANAGER'],
             ['CMD','CMD IN CUSTOM_CMD'],
             ['PYTHON','PYTHON IN CUSTOM_CMD'],
-            ['LISTW','LIST OF .DOCX'],
-            ['PIP','INSTALL PY-PACKAGES'],
-            ['TASKKILL','KILL OPERATONS'],
-            ['PASSWORD','STRONG PASSWORD GENERATOR'],
-            ['ZOOM','ZOOM AUTOMATION'],
+            ['LISTW','LIST OF WORD DOCUMENTS'],
+            ['CLOSE','KILL OPERATONS'],
+            ['PASS','STRONG PASSWORD GENERATOR'],
             ['NM','TEMPORARY PYTHON FILE'],
-            ['UIC','UI TO PY CONVERTER'],
-            
+            ['UIC','UI TO PY CONVERTER'],        
             ]
     dash = '-' * 30
     for i in range(len(data)):
