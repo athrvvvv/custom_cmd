@@ -8,7 +8,6 @@ def priority_list():
     check_file = os.path.isfile(r"C:\Users\athar\OneDrive\Documents\projects\hidden_works\priority_list.txt")
     if check_file == (False):
         os.system("echo> "+r"C:\Users\athar\OneDrive\Documents\projects\hidden_works\priority_list.txt")
-    
     with open(r"C:\Users\athar\OneDrive\Documents\projects\hidden_works\priority_list.txt", "r") as np_file:    
             data = np_file.read()
             number_of_characters = len(data)
