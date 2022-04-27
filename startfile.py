@@ -78,8 +78,8 @@ def open_cmd():
 def open_telegram():
     os.startfile(r"C:\Users\athar\AppData\Roaming\Telegram Desktop\Telegram.exe")
 
-def forcewhatsapp():
-    os.startfile(r"C:\Users\athar\OneDrive\Documents\force\WhatsAppSetup.exe")
+def whatsapp_stable():
+    os.startfile("explorer shell:appsFolder\com.squirrel.WhatsApp.WhatsApp")
 
 def killandstartvs():
     os.system("taskkill /im Code.exe /f")
