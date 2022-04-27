@@ -250,10 +250,16 @@ while True:
         tracking_master.tracker()
     
     elif "x" in val:
-        answer = val.replace("x","")
-        ans = int(answer)
-        features.refresh_x(ans)
-    
+        try:
+            answer = val.replace("x","")
+            ans = int(answer)
+            features.refresh_x(ans)
+        except:
+            pass
+   
+    elif val == "writer":
+        features.writer()
+
     elif val == ("re"):
         importlib.reload(file_management)
         importlib.reload(scheduler)
