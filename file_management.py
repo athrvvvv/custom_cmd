@@ -1,4 +1,3 @@
-from fileinput import filename
 import os, readline
 from datetime import datetime
 import WConio2 as input_source
