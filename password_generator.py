@@ -66,3 +66,8 @@ def password():
             file_path = (r"C:\Users\athar\OneDrive\Documents\PDR\paint.txt")
             with open(file_path, "a") as np_file:
                 np_file.write(input1+"\n"+input2+"  -  "+password+ "\n")
+
+def get_pass():
+    file = open(r"C:\Users\athar\OneDrive\Documents\PDR\paint.txt","r")
+    print(file.read())
+
