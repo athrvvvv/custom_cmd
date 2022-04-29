@@ -121,3 +121,16 @@ def tracker():
             track_file = open(os.path.join(main_path,'tracker','track_on.txt'),'w')
             track_file.write(track_on_file+'.txt')
     completer_on()
+    
+def tracker_on():
+    status = open(os.path.join(main_path,'tracker','track_on.txt'),"r")
+    content = status.read()
+    lenght = len(content)
+    if content == (0):
+        print("ALERT: TRACKER OFF!")
+    else:
+        temp = content.replace(".txt","")
+        temp1 = "TRACKER IS ON "+temp
+        print()
+        print(temp1)
+        print()
