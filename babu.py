@@ -6,14 +6,14 @@ import processor
 import os
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
+# All ESSENTIAL DIRS and FILES CHECKER
+features.check_dir()
 # MAXIMISES PROGRAM 
 features.maximize()
 # FUNCTIONALITY FOR blank inputs
 features.clear_command_history()
 # Count greeting (For only one time a day)
 features.greet()
-# All ESSENTIAL DIRS and FILES CHECKER
-features.check_dir()
 # FUNCTIONALITY FOR tracking master
 tracking_master.count_on()
 
