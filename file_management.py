@@ -172,18 +172,25 @@ def subproject():
     completer = MyCompleter(filenames)
     readline.set_completer(completer.complete)
     readline.parse_and_bind('tab: complete')
-    input1 = input("COMMAND: ")
+    input1 = input("FOLDER / FILE: ")
     if (" clean") in input1:
-        temp = input1.replace(" clean","")
+        temp = input1.replace(" clean","").strip()
         a = (r"%userprofile%\OneDrive\Documents\projects\\"+temp+"\\")
         b = (path+"/"+temp)
         check_dir = os.path.isdir(b)
         if check_dir == (True):
-            os.system("del "+a+"*.bak")
-            #ADD VERIFICATION OF __pycache__
-            os.system("del /s /q "+a+"__pycache__")
-            os.system("rmdir "+a+"__pycache__")
-            completer_on()
+            check_bak = [file for file in os.listdir(b) if file.endswith('.bak')]
+            check_pycache = os.path.exists(os.path.join(b,"__pycache__"))
+            if check_bak != []:
+                os.system("del "+a+"*.bak")
+            if check_pycache == (True):
+                os.system("del /s /q "+a+"__pycache__")
+                os.system("rmdir "+a+"__pycache__")
+                completer_on()
+            else:
+                print()
+                print("IT's CLEAN AF!")
+                print()
         else:
             print()
             print("FALSE DIR")
