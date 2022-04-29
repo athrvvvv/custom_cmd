@@ -250,5 +250,8 @@ def processor(self):
 
         elif val == ("re"):
             features.reload_babu()
+        
+        elif val == ("tracker-"):
+            tracking_master.tracker_on()
 
     
