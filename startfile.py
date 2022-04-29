@@ -79,7 +79,7 @@ def open_telegram():
     os.startfile(r"C:\Users\athar\AppData\Roaming\Telegram Desktop\Telegram.exe")
 
 def whatsapp_stable():
-    os.startfile("explorer shell:appsFolder\com.squirrel.WhatsApp.WhatsApp")
+    os.system("explorer shell:appsFolder\com.squirrel.WhatsApp.WhatsApp")
 
 def killandstartvs():
     os.system("taskkill /im Code.exe /f")
@@ -98,7 +98,7 @@ def npp():
     os.system("start notepad++")
 
 def open_resso():
-    os.system(r" start C:\Users\athar\AppData\Local\Programs\Resso\Resso.exe")
+    os.system(r"start C:\Users\athar\AppData\Local\Programs\Resso\Resso.exe")
 
 def ssf():
     os.startfile(r"C:\Users\athar\OneDrive\Pictures\Screenshots")
@@ -107,13 +107,13 @@ def documents():
     os.system("start " +r"C:\Users\athar\OneDrive\Documents")
 
 def googlephotos():
-    os.system("explorer shell:appsfolder\Brave._crx_ncmjhecbjefahankockkkdmedg")
+    os.system("explorer shell:appsFolder\Brave._crx_ncmjhecbjefahankockkkdmedg")
 
 def youtubewa():
-    os.system("explorer shell:appsfolder\Brave._crx_agimnkijcamfeangaknmldooml")
+    os.system("explorer shell:appsFolder\Brave._crx_agimnkijcamfeangaknmldooml")
 
 def calendar():
-    os.system("explorer shell:appsfolder\microsoft.windowscommunicationsapps_8wekyb3d8bbwe!microsoft.windowslive.calendar")
+    os.system("explorer shell:appsFolder\microsoft.windowscommunicationsapps_8wekyb3d8bbwe!microsoft.windowslive.calendar")
 
 def bin():
     os.system("explorer shell:appsFolder\::{645FF040-5081-101B-9F08-00AA002F954E}")
