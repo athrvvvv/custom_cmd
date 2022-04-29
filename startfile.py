@@ -116,7 +116,7 @@ def calendar():
     os.system("explorer shell:appsFolder\microsoft.windowscommunicationsapps_8wekyb3d8bbwe!microsoft.windowslive.calendar")
 
 def bin():
-    os.system("explorer shell:appsFolder\::{645FF040-5081-101B-9F08-00AA002F954E}")
+    os.system("start shell:RecycleBinFolder")
 
 def messages():
     os.system("explorer shell:appsFolder\Brave._crx_hpfldicfbfkngkocigghgafkph")
