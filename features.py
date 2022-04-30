@@ -177,14 +177,14 @@ def check_dir():
     autogenarated_files = os.path.exists(os.path.join(main_path,'autogenarated_files'))
     if tracker == (False):
         os.mkdir(os.path.join(main_path,'tracker'))
-        os.system("attrib +h "+ os.path.join(main_path,'tracker'))
+        os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
     if status == (False):
         open(os.path.join(main_path,'tracker','status.txt'),'a').close()
     if track_on == (False):
         open(os.path.join(main_path,'tracker','track_on.txt'),'a').close()
     if autogenarated_files == (False):
         os.mkdir(os.path.join(main_path,'autogenarated_files'))
-        os.system("attrib +h "+ os.path.join(main_path,'autogenarated_files'))
+        os.system("attrib +h "+ '"'+os.path.join(main_path,'autogenarated_files')+'"')
 
 def refresh_x(self):
     win32api.keybd_event(0x5B, 0, ) # LWIN
