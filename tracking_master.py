@@ -126,7 +126,7 @@ def tracker_on():
     status = open(os.path.join(main_path,'tracker','track_on.txt'),"r")
     content = status.read()
     lenght = len(content)
-    if content == (0):
+    if lenght == (0):
         print("ALERT: TRACKER OFF!")
     else:
         temp = content.replace(".txt","")
@@ -134,3 +134,15 @@ def tracker_on():
         print()
         print(temp1)
         print()
+    try:
+        summary = open(os.path.join(main_path,'tracker',content),"r")
+        content1 = summary.read()
+        if content1 == ("1"):
+            print("WE'RE WORKING ON "+temp1+" "+"FROM "+content1+" DAY")
+        else:
+            print("WE'RE WORKING ON "+temp1+" "+"FROM "+content1+" DAYS")
+        print()
+    except:
+        print("NOTHING ON TRACK OR TRACKER OFF")
+        print("")
+        pass
