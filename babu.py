@@ -219,9 +219,6 @@ while True:
     elif val == ("maximize"):
         features.maximize()
     
-    elif val == ("script"):
-        startfile.script()
-    
     elif val == ("fdm"):
         startfile.fdm()
     
@@ -269,8 +266,12 @@ while True:
     
     elif val == ("tracker-"):
         tracking_master.tracker_on()
+
+    elif val == ("nmf"):
+        file_management.nmf() 
     
-    elif val == ("counter"):
-        tracking_master.counter()    
+    elif ("bluetooth ") in val:
+        temp = val.replace("bluetooth","")
+        features.bluetooth(temp)
 
 
