@@ -145,10 +145,10 @@ def newfolder():
             print("VS CODE OPEN (Y) SIMPLE OPEN (S) EXIT ()")
             print("")
             ask_for_opening = input_source.getkey()
-            if ask_for_opening == ("s"):
+            if ask_for_opening == ("s") or ask_for_opening == ("S"):
                 os.startfile("C:/Users/athar/OneDrive/Documents/projects/"+folder_name)
                 exit
-            if ask_for_opening == ("y"):
+            if ask_for_opening == ("y") or ask_for_opening == ("Y"):
                 os.system("code "+"C:/Users/athar/OneDrive/Documents/projects/"+folder_name)
                 exit
             if ask_for_opening == (""):
@@ -189,28 +189,18 @@ def subproject():
     readline.parse_and_bind('tab: complete')
     input1 = input("FOLDER / FILE: ")
     if (" clean") in input1:
-        temp = input1.replace(" clean","").strip()
-        a = (r"%userprofile%\OneDrive\Documents\projects\\"+temp+"\\")
-        b = (path+"/"+temp)
-        check_dir = os.path.isdir(b)
-        if check_dir == (True):
-            check_bak = [file for file in os.listdir(b) if file.endswith('.bak')]
-            check_pycache = os.path.exists(os.path.join(b,"__pycache__"))
-            if check_bak != []:
-                os.system("del "+a+"*.bak")
-            if check_pycache == (True):
-                os.system("del /s /q "+a+"__pycache__")
-                os.system("rmdir "+a+"__pycache__")
-                completer_on()
-            else:
-                print()
-                print("IT's CLEAN AF!")
-                print()
-        else:
-            print()
-            print("FALSE DIR")
-            print()
-            completer_on()
+        dir_name = input1.replace(" clean","").strip()
+        initial_path = os.path.join(path,dir_name)
+        check_initial = os.path.exists(initial_path)
+        if check_initial == (True):
+            full_path = os.listdir(initial_path)
+            check_cache = os.path.exists(os.path.join(path,dir_name,"__pycache__"))
+            for f in full_path:
+                if f.endswith(".bak"):
+                    os.remove(os.path.join(initial_path,f))
+            if check_cache == (True):
+                shutil.rmtree(os.path.join(path,dir_name,"__pycache__"))
+
     elif input1 == (""):
         os.system("start " r"C:\Users\athar\OneDrive\Documents\projects")
         completer_on()
@@ -392,9 +382,6 @@ def subproject():
                         print("FILE ALREADY EXISTS")      
                         print()
             else:
-                check_file = os.path.isfile(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt")
-                if check_file == (False):
-                    os.system("echo> "+r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt")
                 with open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'w') as writer:
                     writer.write(" "+filename_to_open)
                 with open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'r') as writer:
@@ -459,3 +446,62 @@ def subproject():
             print("FALSE DIR")
             print()
     completer_on()
+
+def nmf():
+    project = r"C:\Users\athar\OneDrive\Documents\projects\imp_code"
+    c = os.listdir(project)
+    for f in c:
+        if f.endswith(".bak"):
+            os.remove(os.path.join(project,f))
+    a = os.listdir(project)
+    completer = MyCompleter(a)
+    readline.set_completer(completer.complete)
+    readline.parse_and_bind('tab: complete')
+    print()
+    for file in a:
+        if file.endswith(".py"):
+            print(file)
+    print()
+    input1 = input("FILENAME TO OPEN: ")
+    if input1 == (""):
+        os.startfile(project)
+    elif input1 == ("q"):
+        StopIteration()
+    else:
+        checkfile = os.path.exists(os.path.join(project,input1))
+        with open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'w') as writer:
+            writer.write(" "+input1)
+        with open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'r') as writer:
+            number_of_files = 0
+            data = writer.read()
+            lines = data.split()
+            number_of_files += len(lines)
+            if number_of_files == (1):
+                input_path = (os.path.join(project,input1))
+                check_file = os.path.isfile(input_path) 
+                if check_file == (True):
+                    print("1 FILE DETECTED")
+                    os.system("start notepad++ "+input_path)
+                    print()
+                else:
+                    print()
+                    print("FALSE FILE NAME:(")
+                    print()                                        
+            else:
+                print(number_of_files,"FILES DETECTED")
+                with open (r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'r') as replace_file:
+                    slash = "/"
+                    reading = replace_file.read()
+                    replacing = reading.replace(" ",(" "+project+"/"))
+                with open (r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'w') as write_file:
+                    write_file.write(replacing)
+                data_in_file = open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'r')
+                reading_data = data_in_file.read().split()
+                for word in reading_data:
+                    is_file = os.path.exists(word)
+                    if is_file == (True):
+                        os.system("start notepad++ "+word)
+                    else:
+                        print("IGNORED SOME PSEUDO FILES")
+                print()                                
+    completer_on()    
