@@ -53,19 +53,7 @@ def cmd_command():
 
 def yt():
     os.system("start brave youtube.com")
-        
-def click():
-    current = datetime.today()
-    current_illusion = current.strftime("%b-%d-%Y %I-%M-%S %p")
-    string_time = str(current_illusion)
-    time.sleep(3)
-    image = pyscreenshot.grab()
-    isonedrive = os.path.exists(os.path.join(profile,"OneDrive"))
-    if isonedrive == (True):
-        image.save(os.path.join(os.path.join(profile,"OneDrive\Pictures\Screenshots/"+string_time+".png")))
-    else:
-        image.save(os.path.join(profile,"OneDrive\Pictures\Screenshots/"+string_time+".png"))
-
+       
 def battery_percent():
     battery = psutil.sensors_battery()
     print()
