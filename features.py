@@ -171,10 +171,13 @@ def com(self):
 
 # Feature for tracking master
 def check_dir():
+    main_pathh = str(main_path)
     tracker = os.path.exists(os.path.join(main_path,'tracker'))
     status = os.path.exists(os.path.join(main_path,'tracker','status.txt'))
     track_on = os.path.exists(os.path.join(main_path,'tracker','track_on.txt'))
     autogenarated_files = os.path.exists(os.path.join(main_path,'autogenarated_files'))
+    counter = os.path.exists(os.path.join(main_path,"autogenarated_files","counter.txt"))
+    imp_code = os.path.exists(os.path.join(main_pathh.replace("\custom_cmd",""),"imp_code"))
     if tracker == (False):
         os.mkdir(os.path.join(main_path,'tracker'))
         os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
@@ -185,7 +188,10 @@ def check_dir():
     if autogenarated_files == (False):
         os.mkdir(os.path.join(main_path,'autogenarated_files'))
         os.system("attrib +h "+ '"'+os.path.join(main_path,'autogenarated_files')+'"')
-
+    if counter == (False):
+        open(os.path.join(main_path,"autogenarated_files","counter.txt"),"a").close()
+    if imp_code == (False):
+        os.mkdir(os.path.join(main_pathh.replace("\custom_cmd",""),"imp_code"))
 def refresh_x(self):
     win32api.keybd_event(0x5B, 0, ) # LWIN
     win32api.keybd_event(0x44, 0, ) # D
@@ -244,7 +250,6 @@ def reload_babu():
     import features
     import startfile
     import tracking_master
-    import processor
     reload(file_management)
     reload(scheduler)
     reload(commands)
@@ -254,4 +259,12 @@ def reload_babu():
     reload(tracking_master)
     reload(cleaner)
     reload(babu)
-    reload(processor)
+    
+def bluetooth(self):
+    selff = self.strip()
+    if selff == "on":
+        os.system("powershell -command {} -BluetoothStatus On".format(os.path.join(main_path,"bluetooth.ps1")))
+    elif selff == "off":
+        os.system("powershell -command {} -BluetoothStatus Off".format(os.path.join(main_path,"bluetooth.ps1")))
+    else:
+        print("ONLY ACCEPTS ON AND OFF")
