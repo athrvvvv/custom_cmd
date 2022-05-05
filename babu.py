@@ -197,7 +197,7 @@ while True:
         startfile.signal()
         
     elif val == ("ss"):
-        features.click()
+        os.startfile(os.path.join(main_path,"screenshot.pyw"))
     
     elif val == ("print"):
         startfile.print()
