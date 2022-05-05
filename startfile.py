@@ -130,9 +130,6 @@ def signal():
 def print():   
     os.startfile(r"C:\Program Files\HP\HP Ink Tank Wireless 410 series\Bin\HP Ink Tank Wireless 410 series.exe")
 
-def script():
-    os.startfile(r"C:\Users\athar\OneDrive\Documents\word_docs\script.pdf")
-
 def fdm():
     os.system("explorer shell:appsFolder\FreeDownloadManager")
 
