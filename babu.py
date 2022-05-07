@@ -24,11 +24,12 @@ main_path = os.path.dirname(__file__)
 
 while True:
     val = input("TYPE IN HERE: ").lower().strip()
+    features.check_empty_command()
     if val == ("cls"):
             startfile.clear_console()
 
     elif val == ("exit"):
-        exit()
+        os._exit(0)
 
     elif val == ("restart"):
         startfile.restart()
@@ -274,4 +275,7 @@ while True:
         temp = val.replace("bluetooth","")
         features.bluetooth(temp)
 
+    elif "" in val:
+        with open(os.path.join(main_path,"autogenarated_files","command_history.txt"),"a") as f:
+            f.write("EMPTY"+"\n")
 
