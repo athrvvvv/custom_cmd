@@ -118,20 +118,20 @@ def dummy_file():
     os.popen('"'+"C:/Progra~1/Notepad++/notepad++.exe"+'"'+space+'"'+"C:/Users/athar/OneDrive/Documents/projects/dummy_folder/"+current_time+".py"+'"')
 
 def custom_dummy_file(self):
-    check_self = os.path.exists(r"C:/Users/athar/OneDrive/Documents/projects/imp_code/"+self+".py")
+    check_self = os.path.exists(os.path.join((main_path.replace("\custom_cmd","")),"imp_code",(self+".py")))
     space = " "
     if self == "":
         StopIteration()
     else:
         if check_self == (False):
-            os.system("start"+"python >"+"C:/Users/athar/OneDrive/Documents/projects/imp_code/"+self+".py")
-            os.popen('"'+"C:/Progra~1/Notepad++/notepad++.exe"+'"'+space+'"'+"C:/Users/athar/OneDrive/Documents/projects/imp_code/"+self+".py"+'"')
+            os.system("start"+"python > "+(os.path.join((main_path.replace("\custom_cmd","")),"imp_code",(self+".py"))))
+            os.popen("start notepad++ "+'"'+(os.path.join((main_path.replace("\custom_cmd","")),"imp_code",(self+".py")))+'"')
         else:
             print()
             print("FILE ALREADY EXISTS")
             print()
-            os.popen('"'+"C:/Progra~1/Notepad++/notepad++.exe"+'"'+space+'"'+"C:/Users/athar/OneDrive/Documents/projects/imp_code/"+self+".py"+'"')
-        
+            os.popen("start notepad++ "+'"'+(os.path.join((main_path.replace("\custom_cmd","")),"imp_code",(self+".py")))+'"')
+            
 #DELETING THE CONTAIN INSIDE DUMMY DIR
 def delete_dummy():
     os.system("del /S /Q C:\\Users\\athar\\OneDrive\\Documents\\projects\\dummy_folder")
