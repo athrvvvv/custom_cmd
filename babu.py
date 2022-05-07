@@ -5,7 +5,8 @@ import commands
 import password_generator
 import features
 import startfile
-import tracking_master  
+import tracking_master 
+import gui_applications 
 import os, readline
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
@@ -113,7 +114,7 @@ while True:
         startfile.designer()
 
     elif val == ("uic"):
-        file_management.ui_to_py()
+        gui_applications.ui_to_py()
     
     elif val == ("nm"):
         file_management.dummy_file()
@@ -274,6 +275,9 @@ while True:
     elif ("bluetooth ") in val:
         temp = val.replace("bluetooth","")
         features.bluetooth(temp)
+    
+    elif val == ("timer"):
+        os.startfile(os.path.join(main_path,"timer.pyw"))
 
     elif "" in val:
         with open(os.path.join(main_path,"autogenarated_files","command_history.txt"),"a") as f:
