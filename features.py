@@ -39,7 +39,7 @@ def get_window_foreground():
         win.activate()
     except:
         pass
-        print("WHAT THE F**K.., you asking about!??")
+        print("WHAT THE HECK.., you asking about!??")
 
 def cmd_command():
     input1 = input("CMD COMMAND:")
