@@ -85,36 +85,13 @@ def listdir_word():
         else:
             print("FALSE FILE :(")
     completer_on()
-       
-#UI TO PY FILE CONVERSION
-def ui_to_py():
-    try:
-        path, file_name = input("FILE PATH - FILE NAME:").split()
-        if ".ui" in file_name:
-            file_name1 = file_name.replace(".ui","")
-            check_file = os.path.exists(os.path.join(path,file_name))
-            if check_file == (True):
-                os.system("pyuic5 -x "+'"'+path+"/"+file_name1+".ui"+'"'+" -o "+'"'+path+"/"+file_name1+".py"+'"')
-            else:
-                print("FILE DOES'NT EXISTS")
-        else:
-            check_file = os.path.exists(os.path.join(path,file_name+".ui"))
-            if check_file == (True):
-                os.system("pyuic5 -x "+'"'+path+"/"+file_name+".ui"+'"'+" -o "+'"'+path+"/"+file_name+".py"+'"')
-            else:
-                print("FILE DOES'NT EXISTS")
-    except:
-        print("")
-        print("Something went wrong :(")
-        print()
-        pass
     
 #CREATE DUMMY PYTHON FILES
 def dummy_file():
     now = datetime.now()
     space = " "
     current_time = now.strftime("%b_%d_%I.%M.%S")
-    os.system("start"+"python >"+"C:/Users/athar/OneDrive/Documents/projects/dummy_folder/"+current_time+".py")
+    open(("C:/Users/athar/OneDrive/Documents/projects/dummy_folder/"+current_time+".py"),"w").close()
     os.popen('"'+"C:/Progra~1/Notepad++/notepad++.exe"+'"'+space+'"'+"C:/Users/athar/OneDrive/Documents/projects/dummy_folder/"+current_time+".py"+'"')
 
 def custom_dummy_file(self):
@@ -200,7 +177,6 @@ def subproject():
                     os.remove(os.path.join(initial_path,f))
             if check_cache == (True):
                 shutil.rmtree(os.path.join(path,dir_name,"__pycache__"))
-
     elif input1 == (""):
         os.system("start " r"C:\Users\athar\OneDrive\Documents\projects")
         completer_on()
