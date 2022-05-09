@@ -68,16 +68,6 @@ def kill_selective_tasks():
 def maximize():
     hwnd = win32gui.GetForegroundWindow()
     win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)
-    
-def opera_search():
-    file1 = open(os.path.join(main_path,'autogenarated_files','search.txt'),"r")
-    final_search = file1.read()
-    if ".com" in final_search:
-        os.system("start opera "+final_search)
-    else:
-        modify = final_search.split(' ')
-        modify_final = ("+".join(modify))
-        os.system("start opera https://www.google.com/search?q="+modify_final)
 
 def brave_search(self):
     modify = self.split(' ')
@@ -166,6 +156,7 @@ def check_dir():
     autogenarated_files = os.path.exists(os.path.join(main_path,'autogenarated_files'))
     counter = os.path.exists(os.path.join(main_path,"autogenarated_files","counter.txt"))
     imp_code = os.path.exists(os.path.join(main_pathh.replace("\custom_cmd",""),"imp_code"))
+    prio_status = os.path.exists(os.path.join(main_path,"autogenarated_files","prio_status.txt"))
     if tracker == (False):
         os.mkdir(os.path.join(main_path,'tracker'))
         os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
@@ -180,6 +171,8 @@ def check_dir():
         open(os.path.join(main_path,"autogenarated_files","counter.txt"),"a").close()
     if imp_code == (False):
         os.mkdir(os.path.join(main_pathh.replace("\custom_cmd",""),"imp_code"))
+    if prio_status == (False):
+        open(os.path.join(main_path,'autogenarated_files','prio_status.txt'),'a').close()
 def refresh_x(self):
     win32api.keybd_event(0x5B, 0, ) # LWIN
     win32api.keybd_event(0x44, 0, ) # D
@@ -256,3 +249,26 @@ def bluetooth(self):
         os.system("powershell -command {} -BluetoothStatus Off".format(os.path.join(main_path,"bluetooth.ps1")))
     else:
         print("ONLY ACCEPTS ON AND OFF")
+
+def auto_bs_search(self):
+    split_it_baby = self.split()
+    length = len(split_it_baby)
+    if length > 2:
+        print("SEARCH")
+        modify = self.split(' ')
+        modify_final = ("+".join(modify))
+        os.system("start brave https://www.google.com/search?q="+modify_final)
+
+def greet_time():
+    current_hour = int(datetime.now().strftime('%H'))
+    if current_hour > 5 and current_hour < 12:
+        print('Good morning!')
+    elif current_hour <23:
+        # while True:
+            # print("You should have sleep now")
+        print("You should have sleep now")
+    elif 12<=current_hour<18:
+        print('Good afternoon!')
+    else:
+        print('Good Evening')
+    
