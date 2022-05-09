@@ -264,9 +264,9 @@ def greet_time():
     if current_hour > 5 and current_hour < 12:
         print('Good morning!')
     elif current_hour <23:
-        # while True:
-            # print("You should have sleep now")
-        print("You should have sleep now")
+        while True:
+            print("You should sleep now")
+        # print("You should sleep now")
     elif 12<=current_hour<18:
         print('Good afternoon!')
     else:
