@@ -96,18 +96,17 @@ def dummy_file():
 
 def custom_dummy_file(self):
     check_self = os.path.exists(os.path.join((main_path.replace("\custom_cmd","")),"imp_code",(self+".py")))
-    space = " "
     if self == "":
         StopIteration()
     else:
         if check_self == (False):
-            os.system("start"+"python > "+(os.path.join((main_path.replace("\custom_cmd","")),"imp_code",(self+".py"))))
+            open(os.path.join(main_path.replace("\custom_cmd",""),"imp_code",(self+".py")),"w").close()
             os.popen("start notepad++ "+'"'+(os.path.join((main_path.replace("\custom_cmd","")),"imp_code",(self+".py")))+'"')
         else:
             print()
             print("FILE ALREADY EXISTS")
-            print()
-            os.popen("start notepad++ "+'"'+(os.path.join((main_path.replace("\custom_cmd","")),"imp_code",(self+".py")))+'"')
+            print() 
+            os.popen("start notepad++ "+'"'+(os.path.join((main_path.replace("\custom_cmd",""),"imp_code",(self+".py")))+'"'))
             
 #DELETING THE CONTAIN INSIDE DUMMY DIR
 def delete_dummy():
