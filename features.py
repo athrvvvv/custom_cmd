@@ -1,4 +1,4 @@
-import os,pyscreenshot, pygetwindow, time, psutil
+import os,pygetwindow, time, psutil
 from datetime import datetime, date, timedelta
 import win32gui, win32con, win32api ,keyboard, pyautogui
 from importlib import reload
@@ -77,16 +77,15 @@ def brave_search(self):
     else:
         os.system("start brave https://www.google.com/search?q="+modify_final)
     
-
 def clear_command_history():
-    file = open(os.path.join(main_path,'autogenarated_files',"command_history.txt"),"w")
-    file.close()
+    open(os.path.join(main_path,'autogenarated_files',"command_history.txt"),"w").close()
 
 def check_empty_command():
     f = open(os.path.join(main_path,'autogenarated_files',"command_history.txt"),"r")
-    read = f.read()
+    read_it_baby = f.read()
+    read = read_it_baby.split()
     len_read = len(read)
-    if len_read == (100) or len_read > (100):
+    if len_read == (20) or len_read > (20):
         print()
         print("EXITING...")
         print()
