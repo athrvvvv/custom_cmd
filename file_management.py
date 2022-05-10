@@ -110,8 +110,11 @@ def custom_dummy_file(self):
             
 #DELETING THE CONTAIN INSIDE DUMMY DIR
 def delete_dummy():
-    os.system("del /S /Q C:\\Users\\athar\\OneDrive\\Documents\\projects\\dummy_folder")
-
+    path = (os.path.join((os.path.dirname(main_path)),"dummy_folder"))
+    filenames = os.listdir(path)
+    for filename in filenames:
+        os.remove(os.path.join(path,filename))
+        
 #CREATING NEW DIR FROM CMD
 def newfolder():
     try:
@@ -148,11 +151,7 @@ def newfolder():
         print("IT WAS STRANGE..!")
         print("")
 
-#JUPYTER NOTEBOOK
-def jupyternotebook_ml_mf():
-    os.startfile(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\jupyter_notebook.py")
-
-#SUB-PROJECT SELECTER
+#SUB-PROJECT SELECTER (PS FUNCTION)
 def subproject():
     path = (r"C:\Users\athar\OneDrive\Documents\projects")
     filenames = os.listdir(path)
@@ -178,9 +177,7 @@ def subproject():
                 shutil.rmtree(os.path.join(path,dir_name,"__pycache__"))
     elif input1 == (""):
         os.system("start " r"C:\Users\athar\OneDrive\Documents\projects")
-        completer_on()
     elif input1 == ("q"):
-        completer_on()
         StopIteration()
     # OPENS CMD IN SPECIFIC DIR
     elif " cmd" in input1:
@@ -189,12 +186,10 @@ def subproject():
         check_file = os.path.exists(b)
         if check_file == (True):
             os.system("start cmd /K cd "+b)
-            completer_on()
         else:
             print()
             print("FALSE DIR")
             print()
-            completer_on()
     # OPENS GIT IN SPECIFIC DIR
     elif " git" in input1:
         temp = input1.replace(" git","")
@@ -202,28 +197,22 @@ def subproject():
         check_file = os.path.exists(b)
         if check_file == (True):
             os.popen(('"'+"C:\Program Files\Git\git-bash.exe"+'" '+"--cd="+'"'+b+'"'))
-            completer_on()
         else:
             print()
             print("FALSE DIR")
             print()
-            completer_on()
     # OPEN FOLDERS IN VS CODE
     elif " vs" in input1:
         temp = input1.replace(" vs","")
         isdir = os.path.isdir(path+"/"+temp)
-        completer_on()
         if isdir == (True):
             os.system("code "+path+"/"+temp)
             print()
-            completer_on()
             StopIteration()
         elif isdir == (False):
             print()
             print("FALSE FILE NAME:(")
             print()
-            completer_on()
-
     # OPEN PARTICULAR FILES IN VS CODE
     elif " -vs" in input1:
         folder_name_vs = input1.replace(" -vs","")
@@ -278,13 +267,11 @@ def subproject():
                             print("1 FILE DETECTED")
                             os.system("code "+input_path)
                             print()
-                            completer_on()
                             exit
                         else:
                             print()
                             print("FALSE FILE NAME:(")
-                            print()
-                            completer_on()                                         
+                            print()                                      
                     else:
                         print(number_of_files,"FILES DETECTED")
                         with open (r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_vs.txt", 'r') as replace_file:
@@ -298,7 +285,6 @@ def subproject():
                         reading_data = data_in_file.read()
                         os.system("code "+reading_data)
                         print()                                
-        completer_on()
     # Track projects shortcut
     elif (" -track") in input1:
         to_track = input1.replace(' -track','')
@@ -309,7 +295,6 @@ def subproject():
             input_to_tarck = open(os.path.join(main_path,'tracker','track_on.txt'),'w')
             input_to_tarck.write(to_track+'.txt')
             tracking_master.count_on()
-        completer_on()
     # OPENS ANY FILES/DIR IN NPP 
     elif (" np") in input1:
         folder_name_np = input1.replace(" np","")
@@ -336,7 +321,6 @@ def subproject():
                     print()
                     print("FALSE FILE NAME:(")
                     print()
-                    completer_on()
             elif filename_to_open == ("new"):
                 new_file = input("FILE NEW FILE NAME: ")
                 if new_file == (""):
@@ -371,13 +355,10 @@ def subproject():
                             print("1 FILE DETECTED")
                             os.system("start notepad++ "+input_path)
                             print()
-                            completer_on()
-                            exit
                         else:
                             print()
                             print("FALSE FILE NAME:(")
-                            print()
-                            completer_on()                                         
+                            print()                                         
                     else:
                         print(number_of_files,"FILES DETECTED")
                         with open (r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'r') as replace_file:
@@ -395,8 +376,7 @@ def subproject():
                                 os.system("start notepad++ "+word)
                             else:
                                 print("IGNORED SOME PSEUDO FILES")
-                        print()                                
-        completer_on()    
+                        print()                                 
     elif " bf" in input1:
         dir_name = input1.replace(" bf","")
         check_bf = os.path.exists(os.path.join(path,dir_name,"bugs&features.docx"))
