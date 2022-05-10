@@ -16,19 +16,26 @@ features.check_dir()
 features.maximize()
 # FUNCTIONALITY FOR blank inputs
 features.clear_command_history()
+# GREETING
+features.greet_time()
 # Count greeting (For only one time a day)
 features.greet()
 # FUNCTIONALITY FOR tracking master
 tracking_master.count_on()
+# TELLING PRIORITY_LIST
+scheduler.check_prio_status()
+# TELLING TODO LIST
+scheduler.check_todo_status()
 
 main_path = os.path.dirname(__file__)
 
 while True:
     val = input("TYPE IN HERE: ").lower().strip()
+    features.auto_bs_search(val)
     features.check_empty_command()
     if val == ("cls"):
-            startfile.clear_console()
-
+        startfile.clear_console()
+            
     elif val == ("exit"):
         os._exit(0)
 
@@ -121,7 +128,6 @@ while True:
     
     elif ("nm-") in val:
         temp = val.replace("nm-","")
-        print(temp)
         file_management.custom_dummy_file(temp)
     
     elif val == ("npp"):
@@ -163,8 +169,8 @@ while True:
     elif val == ("clean bin"):
         cleaner.clean_bin()
 
-    elif val == ("roadmap"):
-        scheduler.roadmap()
+    elif val == ("todo"):
+        scheduler.todo()
     
     elif val == ("ps"):
         file_management.subproject()
@@ -234,11 +240,11 @@ while True:
     elif ".com" in val or ".be" in val or ".org" in val:
         features.com(val)
     
-    elif val == ("-status"):
+    elif val == ("status"):
         tracking_master.tracker_status()
     
-    elif ("-status") in val :
-        status = val.replace("-status","")
+    elif ("status-") in val :
+        status = val.replace("status-","")
         if status == ('on') or status == ('off'):
             tracking_master.status_writer(status)
             print("Status updated")
@@ -279,7 +285,15 @@ while True:
     elif val == ("timer"):
         os.startfile(os.path.join(main_path,"timer.pyw"))
 
-    elif "" in val:
+    elif len(val) < 1:
         with open(os.path.join(main_path,"autogenarated_files","command_history.txt"),"a") as f:
             f.write("EMPTY"+"\n")
-
+    
+    elif ("prio-") in val:
+        scheduler.set_on_off_prio(val)
+    
+    elif ("todo-") in val:
+        scheduler.set_on_off_todo(val)
+        
+    elif val == ("mute"):
+        features.mute_speakers()
