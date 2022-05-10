@@ -4,6 +4,7 @@ import win32gui, win32con, win32api ,keyboard, pyautogui
 from importlib import reload
 main_path = (os.path.dirname(__file__))
 profile = os.environ['USERPROFILE']
+
 def current_time():
     now = datetime.now()
     time =now.strftime("%I:%M %p")
@@ -156,6 +157,7 @@ def check_dir():
     counter = os.path.exists(os.path.join(main_path,"autogenarated_files","counter.txt"))
     imp_code = os.path.exists(os.path.join(main_pathh.replace("\custom_cmd",""),"imp_code"))
     prio_status = os.path.exists(os.path.join(main_path,"autogenarated_files","prio_status.txt"))
+    todo_status = os.path.exists(os.path.join(main_path,"autogenarated_files","todo_status.txt"))
     if tracker == (False):
         os.mkdir(os.path.join(main_path,'tracker'))
         os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
@@ -172,6 +174,8 @@ def check_dir():
         os.mkdir(os.path.join(main_pathh.replace("\custom_cmd",""),"imp_code"))
     if prio_status == (False):
         open(os.path.join(main_path,'autogenarated_files','prio_status.txt'),'a').close()
+    if todo_status == (False):
+        open(os.path.join(main_path,"autogenarated_files","prio_status.txt"),"a").close()
 def refresh_x(self):
     win32api.keybd_event(0x5B, 0, ) # LWIN
     win32api.keybd_event(0x44, 0, ) # D
@@ -220,7 +224,7 @@ def writer():
                 time =now_timee.strftime("%I:%M %p")
                 f.write("\n"+"------------------------------------------------------------"+"\n"+date+"\n"+input1+" - "+time)
 
-def reload_babu():
+def reload_babu_config():
     import babu
     import scheduler
     import file_management
@@ -240,6 +244,10 @@ def reload_babu():
     reload(cleaner)
     reload(babu)
     
+def reload_babu():
+    for i in range (9):
+        reload_babu_config()
+
 def bluetooth(self):
     selff = self.strip()
     if selff == "on":
@@ -250,24 +258,34 @@ def bluetooth(self):
         print("ONLY ACCEPTS ON AND OFF")
 
 def auto_bs_search(self):
-    split_it_baby = self.split()
-    length = len(split_it_baby)
-    if length > 2:
-        print("SEARCH")
-        modify = self.split(' ')
-        modify_final = ("+".join(modify))
-        os.system("start brave https://www.google.com/search?q="+modify_final)
+    if "pip install " or "PIP INSTALL " in self:
+        StopIteration()
+    else:
+        split_it_baby = self.split()
+        length = len(split_it_baby)
+        if length > 2:
+            print("SEARCH")
+            modify = self.split(' ')
+            modify_final = ("+".join(modify))
+            os.system("start brave https://www.google.com/search?q="+modify_final)
 
 def greet_time():
     current_hour = int(datetime.now().strftime('%H'))
     if current_hour > 5 and current_hour < 12:
         print('Good morning!')
-    elif current_hour <23:
+        print()
+    elif current_hour <23 and current_hour <5:
         while True:
             print("You should sleep now")
         # print("You should sleep now")
     elif 12<=current_hour<18:
         print('Good afternoon!')
+        print()
     else:
-        print('Good Evening')
+        print('Good Evening..')
+        print()
+
+def mute_speakers():
+    # subprocess.call("cscript.exe "+os.path.join(main_path,"mute.vbs"))
+    os.system(os.path.join(main_path,"mute.vbs"))
     
