@@ -1,4 +1,4 @@
-import os,winshell
+import os,winshell, shutil
 
 def clean_bin():
     #os.system("rd /s /q %systemdrive%\$Recycle.bin")
@@ -7,6 +7,9 @@ def clean_bin():
     #NO DURST
 
 def clean_temp():
-    os.system("del /s /q "+r"%userprofile%\AppData\Local\Temp")
-
+    # filenames = os.listdir(os.path.join(os.path.expanduser('~'),"AppData\Local\Temp"))
+    # for filename in filenames:
+    shutil.rmtree((os.path.join(os.path.expanduser('~'),"AppData\Local\Temp")),ignore_errors=True)
+    # os.remove(os.path.join(os.path.expanduser('~'),"AppData\Local\Temp"))
+    # os.system("del /s /q "+r"%userprofile%\AppData\Local\Temp")
     
