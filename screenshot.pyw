@@ -1,8 +1,6 @@
 from tkinter import *
-import time
-from PIL import ImageTk, Image
 import pyautogui as pg
-import os, sys
+import os
 from datetime import datetime
 main_path = (os.path.dirname(__file__))
 profile = os.environ['USERPROFILE']
@@ -11,7 +9,7 @@ win = Tk()
 win.title("Screenshot taker")
 win.iconbitmap(os.path.join(main_path,"frontend",'screenshot.ico'))
 # Set the size of the window
-win.geometry("500x500")
+win.geometry("400x150")
 
 # Define a function for taking screenshot
 def screenshot():
