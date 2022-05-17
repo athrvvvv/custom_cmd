@@ -30,7 +30,7 @@ scheduler.check_todo_status()
 main_path = os.path.dirname(__file__)
 
 while True:
-    val = input("TYPE IN HERE: ").lower().strip()
+    val = input(commands.choice_command).lower().strip()
     features.auto_bs_search(val)
     features.check_empty_command()
     if val == ("cls"):
@@ -173,7 +173,10 @@ while True:
         scheduler.todo()
     
     elif val == ("ps"):
-        file_management.subproject()
+        file_management.subproject("projects")
+    
+    elif val == ("ec"):
+        file_management.subproject("external_codes")
     
     elif val == ("yt"):
         startfile.youtubewa()
