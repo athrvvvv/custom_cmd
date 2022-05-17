@@ -158,6 +158,7 @@ def check_dir():
     imp_code = os.path.exists(os.path.join(main_pathh.replace("\custom_cmd",""),"imp_code"))
     prio_status = os.path.exists(os.path.join(main_path,"autogenarated_files","prio_status.txt"))
     todo_status = os.path.exists(os.path.join(main_path,"autogenarated_files","todo_status.txt"))
+    dummy_folder = os.path.exists(os.path.join((os.path.dirname(main_pathh)),"dummy_folder"))
     if tracker == (False):
         os.mkdir(os.path.join(main_path,'tracker'))
         os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
@@ -176,6 +177,9 @@ def check_dir():
         open(os.path.join(main_path,'autogenarated_files','prio_status.txt'),'a').close()
     if todo_status == (False):
         open(os.path.join(main_path,"autogenarated_files","prio_status.txt"),"a").close()
+    if dummy_folder == (False):
+        os.mkdir(os.path.join((os.path.dirname(main_pathh)),"dummy_folder"))
+
 def refresh_x(self):
     win32api.keybd_event(0x5B, 0, ) # LWIN
     win32api.keybd_event(0x44, 0, ) # D
@@ -258,7 +262,7 @@ def bluetooth(self):
         print("ONLY ACCEPTS ON AND OFF")
 
 def auto_bs_search(self):
-    if "pip install " or "PIP INSTALL " in self:
+    if "pip install " in self or "PIP INSTALL " in self:
         StopIteration()
     else:
         split_it_baby = self.split()
@@ -271,14 +275,14 @@ def auto_bs_search(self):
 
 def greet_time():
     current_hour = int(datetime.now().strftime('%H'))
-    if current_hour > 5 and current_hour < 12:
+    if current_hour >= 5 and current_hour <= 12:
         print('Good morning!')
         print()
-    elif current_hour <23 and current_hour <5:
+    elif current_hour >=22 and current_hour >=5:
         while True:
             print("You should sleep now")
         # print("You should sleep now")
-    elif 12<=current_hour<18:
+    elif 12<=current_hour<=18:
         print('Good afternoon!')
         print()
     else:
