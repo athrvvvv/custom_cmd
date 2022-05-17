@@ -1,3 +1,4 @@
+import random
 class MyCompleter(object):
     def __init__(self, options):
         self.options = sorted(options)
@@ -42,3 +43,8 @@ def commandss():
             print(dash)
         else:
             print('{:<10s}{:^12s}'.format(data[i][0],data[i][1]))
+
+# TYPE IN HERE: 
+list = ["GIVE CHARGE: ","GIVE CONTROL: ","COME TO POWER: ","ASSUME RESPONSIBILITY: ","STEP IN: ","GIVE DIRECTION: ","GIVE COMMAND: ","STATE COMMAND: "]
+choice_command = str(random.choice(list))
+    
