@@ -1,3 +1,6 @@
+import time
+time.time()  
+timestamp12 = time.time()
 import scheduler
 import file_management
 import cleaner
@@ -8,6 +11,8 @@ import startfile
 import tracking_master 
 import gui_applications 
 import os, readline
+features.read_visited_time()
+features.write_time()
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
 # All ESSENTIAL DIRS and FILES CHECKER
@@ -17,7 +22,7 @@ features.maximize()
 # FUNCTIONALITY FOR blank inputs
 features.clear_command_history()
 # GREETING
-features.greet_time()
+# features.greet_time()
 # Count greeting (For only one time a day)
 features.greet()
 # FUNCTIONALITY FOR tracking master
@@ -28,6 +33,8 @@ scheduler.check_prio_status()
 scheduler.check_todo_status()
 
 main_path = os.path.dirname(__file__)
+timestamp22 = time.time()
+print("Startup took %.2f seconds" % (timestamp22 - timestamp12))
 
 while True:
     val = input(commands.choice_command).lower().strip()
