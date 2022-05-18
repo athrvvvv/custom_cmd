@@ -1,4 +1,4 @@
-import os,pygetwindow, time, psutil
+import os,pygetwindow, time, psutil, json
 from datetime import datetime, date, timedelta
 import win32gui, win32con, win32api ,keyboard, pyautogui
 from importlib import reload
@@ -159,6 +159,7 @@ def check_dir():
     prio_status = os.path.exists(os.path.join(main_path,"autogenarated_files","prio_status.txt"))
     todo_status = os.path.exists(os.path.join(main_path,"autogenarated_files","todo_status.txt"))
     dummy_folder = os.path.exists(os.path.join((os.path.dirname(main_pathh)),"dummy_folder"))
+    appconfig = os.path.exists(os.path.join(main_path,"autogenarated_files","AppConfiguration.json"))
     if tracker == (False):
         os.mkdir(os.path.join(main_path,'tracker'))
         os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
@@ -179,6 +180,8 @@ def check_dir():
         open(os.path.join(main_path,"autogenarated_files","prio_status.txt"),"a").close()
     if dummy_folder == (False):
         os.mkdir(os.path.join((os.path.dirname(main_pathh)),"dummy_folder"))
+    if appconfig == (False):
+        open(os.path.join(main_path,"autogenarated_files","AppConfiguration.json"),"a").close()
 
 def refresh_x(self):
     win32api.keybd_event(0x5B, 0, ) # LWIN
@@ -278,7 +281,7 @@ def greet_time():
     if current_hour >= 5 and current_hour <= 12:
         print('Good morning!')
         print()
-    elif current_hour >=22 and current_hour >=5:
+    elif current_hour >=23 and current_hour >=5:
         while True:
             print("You should sleep now")
         # print("You should sleep now")
@@ -292,4 +295,28 @@ def greet_time():
 def mute_speakers():
     # subprocess.call("cscript.exe "+os.path.join(main_path,"mute.vbs"))
     os.system(os.path.join(main_path,"mute.vbs"))
-    
+
+def write_time():
+    time.time()
+    start_time = time.time()
+    dictionary = {
+	'start_time':start_time}
+    json_object = json.dumps(dictionary,indent=4)
+    with open ((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"w") as f:
+        f.write(json_object)
+
+
+def read_visited_time():
+    time.time()
+    end_time = time.time()
+    f = open(os.path.join(main_path,"autogenarated_files","AppConfiguration.json"))
+    y = json.load(f)
+    start = y['start_time']
+    n = (end_time-start)
+    diff_hour = time.strftime("%H", time.gmtime(n))
+    #diff_hour = time.strftime("%H:%M:%S", time.gmtime(n))
+    if int(diff_hour) > 0 :
+        print("LAST VISITED "+diff_hour+" HOURS AGO")
+        print()
+    else:
+        print("RECENTLY VISITED")
