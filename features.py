@@ -135,7 +135,40 @@ def greet():
         f = open(os.path.join(main_path,"autogenarated_files",dateee+".txt"), "w")
         f.write("GREETED...!!")
         greet_sentence()
-
+        
+def visit_counter(self):
+    if self == ("tell"):
+        with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"r") as f:
+            data = json.load(f)
+            count_int = int(data["visit_count"])
+            print("CUSTOM_CMD was opened "+str(count_int)+" times yesterday :)")
+            data["visit_count"] = '0'
+            data["visit_yesterday"] = str(count_int)
+            with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"w") as f:
+                json.dump(data, f,indent=4)
+    elif self == ("count"):
+        with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"r") as f:
+            data = json.load(f)
+            count_int = int(data["visit_count"])
+        if "visit_count" in data:
+            if count_int == 0 or count_int > 0:
+                count = count_int+1
+                data["visit_count"] = count
+            with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"w") as f:
+                json.dump(data, f,indent=4)
+        else:
+            with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"r") as f:
+                data = json.load(f)
+            data["visit_count"] = '0'
+            with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"w") as f:
+                json.dump(data, f,indent=4)
+    elif self == ("log"):
+        with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"r") as f:
+            data = json.load(f)
+            count_today = data["visit_count"]
+            count_yesterday = data["visit_yesterday"]
+            print("CUSTOM_CMD was opened "+str(count_today)+" times today :)")
+            print("CUSTOM_CMD was opened "+str(count_yesterday)+" times yesterday :)")
 def del_greet_file():
     today = date.today()
     yesterdayy = today - timedelta(days = 1)
@@ -143,6 +176,7 @@ def del_greet_file():
     check_file = os.path.exists(os.path.join(main_path,"autogenarated_files",yesterday+".txt"))
     if check_file == (True):
         os.system("del /f "+(os.path.join(main_path,"autogenarated_files",yesterday+".txt")))
+        visit_counter("tell")
 
 def com(self):
     os.system("start brave "+self)
@@ -282,9 +316,7 @@ def greet_time():
         print('Good morning!')
         print()
     elif current_hour >=23 and current_hour >=5:
-        while True:
-            print("You should sleep now")
-        # print("You should sleep now")
+        print("You should sleep now")
     elif 12<=current_hour<=18:
         print('Good afternoon!')
         print()
@@ -299,12 +331,15 @@ def mute_speakers():
 def write_time():
     time.time()
     start_time = time.time()
-    dictionary = {
-	'start_time':start_time}
-    json_object = json.dumps(dictionary,indent=4)
-    with open ((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"w") as f:
-        f.write(json_object)
-
+    now = datetime.now()
+    time_note =now.strftime("%I:%M %p")
+    json_object = json.dumps(start_time,indent=4)
+    with open ((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"r") as f:
+        data = json.load(f)
+    data["start_time"] = start_time
+    data["last_time"] = time_note
+    with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"w") as f:
+        json.dump(data, f,indent=4)
 
 def read_visited_time():
     time.time()
@@ -312,11 +347,15 @@ def read_visited_time():
     f = open(os.path.join(main_path,"autogenarated_files","AppConfiguration.json"))
     y = json.load(f)
     start = y['start_time']
+    last_time = y['last_time']
     n = (end_time-start)
     diff_hour = time.strftime("%H", time.gmtime(n))
     #diff_hour = time.strftime("%H:%M:%S", time.gmtime(n))
     if int(diff_hour) > 0 :
-        print("LAST VISITED "+diff_hour+" HOURS AGO")
+        print("LASTLY VISITED "+diff_hour+" HOURS AGO AT "+last_time)
         print()
     else:
-        print("RECENTLY VISITED")
+        print("LASTLY VISITED RECENTLY")
+        
+
+    
