@@ -275,18 +275,18 @@ def reload_babu_config():
     import features
     import startfile
     import tracking_master
-    reload(file_management)
+    reload(babu)
     reload(scheduler)
+    reload(file_management)
+    reload(cleaner)
     reload(commands)
     reload(password_generator)
     reload(features)
     reload(startfile)
     reload(tracking_master)
-    reload(cleaner)
-    reload(babu)
     
 def reload_babu():
-    for i in range (9):
+    for i in range (20):
         reload_babu_config()
 
 def bluetooth(self):
@@ -356,6 +356,14 @@ def read_visited_time():
         print()
     else:
         print("LASTLY VISITED RECENTLY")
-        
+
+def wifi(self):
+    if " off" in self:
+        os.system("netsh wlan disconnect")
+    elif " on" in self:
+        os.system("netsh wlan connect name=Nidhi")
+    else:
+        print("ONLY ACCEPTS ON OR OFF")
+    
 
     

@@ -319,3 +319,6 @@ while True:
     
     elif val == ("log"):
         features.visit_counter("log")
+    
+    elif "wifi- " in val:
+        features.wifi(val)
