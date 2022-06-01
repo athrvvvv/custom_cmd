@@ -1,5 +1,4 @@
 import time
-time.time()  
 timestamp12 = time.time()
 import scheduler
 import file_management
@@ -15,11 +14,9 @@ import os, readline
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
 # All ESSENTIAL DIRS and FILES CHECKER
-features.check_dir()
+features.check_AppConfig()
 # MAXIMISES PROGRAM 
 features.maximize()
-# FUNCTIONALITY FOR blank inputs
-features.clear_command_history()
 # GREETING
 features.greet_time()
 # LAST VISITED TIME
@@ -41,14 +38,13 @@ scheduler.check_prio_status()
 scheduler.check_todo_status()
 
 main_path = os.path.dirname(__file__)
-# features.visit_counter("count")
 timestamp22 = time.time()
 print("Startup took %.2f seconds" % (timestamp22 - timestamp12))
 
 while True:
     val = input(commands.choice_command).lower().strip()
     features.auto_bs_search(val)
-    features.check_empty_command()
+    features.write_empty("check_count")
     if val == ("cls"):
         startfile.clear_console()
             
@@ -148,9 +144,6 @@ while True:
     
     elif val == ("npp"):
         startfile.npp()
-
-    elif val == ("new dir"):
-        file_management.newfolder()
 
     elif val == ("pass"):
         password_generator.password()
@@ -305,8 +298,7 @@ while True:
         os.startfile(os.path.join(main_path,"timer.pyw"))
 
     elif len(val) < 1:
-        with open(os.path.join(main_path,"autogenarated_files","command_history.txt"),"a") as f:
-            f.write("EMPTY"+"\n")
+        features.write_empty("write")
     
     elif ("prio-") in val:
         scheduler.set_on_off_prio(val)
