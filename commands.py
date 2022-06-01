@@ -19,7 +19,7 @@ completer = MyCompleter(["brave","battery percent","signal","click","telegram","
 "restart","sleep","shutdown","youtube","word","gimp",
 "files","projects","listw",
 "reopen","opera","telegram","python","time","date",
-"new dir","zoom","music","cmd command","priority list","github.com/athrvvvv","todo","documents", "pass", "quick note","jupyter notebook","clean bin","day","maximize","script","writer","vsdc","tracker","counter","bluetooth","BRAVE","BATTERY PERCENT","SIGNAL","CLICK","TELEGRAM","PHOTOS","WHATSAPP","CLOSE","TWITTER","TEMP","MESSAGES","CALENDAR","COMMANDS", "ZOOM", "RESTART","SLEEP","SHUTDOWN","YOUTUBE","WORD","GIMP", "FILES","PROJECTS","LISTW", "REOPEN","OPERA","TELEGRAM","PYTHON","TIME","DATE", "NEW DIR","ZOOM","MUSIC","CMD COMMAND","PRIORITY LIST", "TODO","DOCUMENTS", "PASS", "QUICK NOTE","JUPYTER NOTEBOOK","CLEAN BIN","DAY","MAXIMIZE","SCRIPT","VSDC","TRACKER","WRITER","COUNTER","BLUETOOTH"])
+"zoom","music","cmd command","priority list","github.com/athrvvvv","todo","documents", "pass", "quick note","jupyter notebook","clean bin","day","maximize","script","writer","vsdc","tracker","counter","bluetooth","BRAVE","BATTERY PERCENT","SIGNAL","CLICK","TELEGRAM","PHOTOS","WHATSAPP","CLOSE","TWITTER","TEMP","MESSAGES","CALENDAR","COMMANDS", "ZOOM", "RESTART","SLEEP","SHUTDOWN","YOUTUBE","WORD","GIMP", "FILES","PROJECTS","LISTW", "REOPEN","OPERA","TELEGRAM","PYTHON","TIME","DATE","ZOOM","MUSIC","CMD COMMAND","PRIORITY LIST", "TODO","DOCUMENTS", "PASS", "QUICK NOTE","JUPYTER NOTEBOOK","CLEAN BIN","DAY","MAXIMIZE","SCRIPT","VSDC","TRACKER","WRITER","COUNTER","BLUETOOTH"])
 
 def commandss():
     data = [['KEY', 'USES'],
@@ -45,6 +45,6 @@ def commandss():
             print('{:<10s}{:^12s}'.format(data[i][0],data[i][1]))
 
 # TYPE IN HERE: 
-list = ["GIVE CHARGE: ","GIVE CONTROL: ","COME TO POWER: ","ASSUME RESPONSIBILITY: ","STEP IN: ","GIVE DIRECTION: ","GIVE COMMAND: ","STATE COMMAND: "]
+list = ["GIVE CHARGE: ","GIVE CONTROL: ","COME TO POWER: ","ASSUME POWER: ","STEP IN: ","GIVE DIRECTION: ","GIVE COMMAND: ","STATE COMMAND: "]
 choice_command = str(random.choice(list))
     
