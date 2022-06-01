@@ -2,7 +2,7 @@ import os,pygetwindow, time, psutil, json
 from datetime import datetime, date, timedelta
 import win32gui, win32con, win32api ,keyboard, pyautogui
 from importlib import reload
-main_path = (os.path.dirname(__file__))
+main_path = str(os.path.dirname(__file__))
 profile = os.environ['USERPROFILE']
 
 def current_time():
@@ -77,21 +77,38 @@ def brave_search(self):
         os.system("start brave "+self)
     else:
         os.system("start brave https://www.google.com/search?q="+modify_final)
-    
-def clear_command_history():
-    open(os.path.join(main_path,'autogenarated_files',"command_history.txt"),"w").close()
 
-def check_empty_command():
-    f = open(os.path.join(main_path,'autogenarated_files',"command_history.txt"),"r")
-    read_it_baby = f.read()
-    read = read_it_baby.split()
-    len_read = len(read)
-    if len_read == (20) or len_read > (20):
-        print()
-        print("EXITING...")
-        print()
-        time.sleep(3)
-        exit()
+def write_empty(self):
+    if self == "write":
+        with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+            data = json.load(f)
+            count_number = data["command_history"]
+            count = count_number + 1
+            y = {"command_history":count}
+            data.update(y)
+        with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
+            g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
+            g.truncate(0)
+            json.dump(data,f,indent=4)
+    if self == "check_count":
+        with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+            data = json.load(f)
+            len_read = data["command_history"]
+        if len_read == (20) or len_read > (20):
+            with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+                data = json.load(f)
+                count_number = data["command_history"]
+                y = {"command_history":0}
+                data.update(y)
+            with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
+                g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
+                g.truncate(0)
+                json.dump(data,f,indent=4)
+            print()
+            print("EXITING...")
+            print()
+            time.sleep(3)
+            exit()
 
 def greet_sentence():
     now = datetime.now()
@@ -138,37 +155,34 @@ def greet():
         
 def visit_counter(self):
     if self == ("tell"):
-        with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"r") as f:
+        with open((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
             data = json.load(f)
             count_int = int(data["visit_count"])
             print("CUSTOM_CMD was opened "+str(count_int)+" times yesterday :)")
-            data["visit_count"] = '0'
+            data["visit_count"] = 0
             data["visit_yesterday"] = str(count_int)
-            with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"w") as f:
+            with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
+                g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
+                g.truncate(0)
                 json.dump(data, f,indent=4)
     elif self == ("count"):
-        with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"r") as f:
+        with open((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
             data = json.load(f)
-            count_int = int(data["visit_count"])
-        if "visit_count" in data:
-            if count_int == 0 or count_int > 0:
-                count = count_int+1
-                data["visit_count"] = count
-            with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"w") as f:
-                json.dump(data, f,indent=4)
-        else:
-            with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"r") as f:
-                data = json.load(f)
-            data["visit_count"] = '0'
-            with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"w") as f:
-                json.dump(data, f,indent=4)
+        count = data["visit_count"] + 1
+        y = {"visit_count":count}
+        data.update(y)
+        with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
+            g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
+            g.truncate(0)
+            json.dump(data,f,indent=4)
     elif self == ("log"):
-        with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"r") as f:
+        with open((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
             data = json.load(f)
             count_today = data["visit_count"]
             count_yesterday = data["visit_yesterday"]
             print("CUSTOM_CMD was opened "+str(count_today)+" times today :)")
             print("CUSTOM_CMD was opened "+str(count_yesterday)+" times yesterday :)")
+
 def del_greet_file():
     today = date.today()
     yesterdayy = today - timedelta(days = 1)
@@ -181,41 +195,53 @@ def del_greet_file():
 def com(self):
     os.system("start brave "+self)
 
-# Feature for tracking master
-def check_dir():
-    main_pathh = str(main_path)
+def check_AppConfig():
     tracker = os.path.exists(os.path.join(main_path,'tracker'))
-    status = os.path.exists(os.path.join(main_path,'tracker','status.txt'))
-    track_on = os.path.exists(os.path.join(main_path,'tracker','track_on.txt'))
-    autogenarated_files = os.path.exists(os.path.join(main_path,'autogenarated_files'))
-    counter = os.path.exists(os.path.join(main_path,"autogenarated_files","counter.txt"))
-    imp_code = os.path.exists(os.path.join(main_pathh.replace("\custom_cmd",""),"imp_code"))
-    prio_status = os.path.exists(os.path.join(main_path,"autogenarated_files","prio_status.txt"))
-    todo_status = os.path.exists(os.path.join(main_path,"autogenarated_files","todo_status.txt"))
-    dummy_folder = os.path.exists(os.path.join((os.path.dirname(main_pathh)),"dummy_folder"))
-    appconfig = os.path.exists(os.path.join(main_path,"autogenarated_files","AppConfiguration.json"))
+    imp_code = os.path.exists(os.path.join(main_path.replace("\custom_cmd",""),"imp_code"))
+    dummy_folder = os.path.exists(os.path.join((os.path.dirname(main_path)),"dummy_folder"))
+    appconfig = os.path.exists(os.path.join(main_path,"AppConfiguration.json"))
     if tracker == (False):
         os.mkdir(os.path.join(main_path,'tracker'))
         os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
-    if status == (False):
-        open(os.path.join(main_path,'tracker','status.txt'),'a').close()
-    if track_on == (False):
-        open(os.path.join(main_path,'tracker','track_on.txt'),'a').close()
-    if autogenarated_files == (False):
-        os.mkdir(os.path.join(main_path,'autogenarated_files'))
-        os.system("attrib +h "+ '"'+os.path.join(main_path,'autogenarated_files')+'"')
-    if counter == (False):
-        open(os.path.join(main_path,"autogenarated_files","counter.txt"),"a").close()
     if imp_code == (False):
-        os.mkdir(os.path.join(main_pathh.replace("\custom_cmd",""),"imp_code"))
-    if prio_status == (False):
-        open(os.path.join(main_path,'autogenarated_files','prio_status.txt'),'a').close()
-    if todo_status == (False):
-        open(os.path.join(main_path,"autogenarated_files","prio_status.txt"),"a").close()
+        os.mkdir(os.path.join(main_path.replace("\custom_cmd",""),"imp_code"))
     if dummy_folder == (False):
-        os.mkdir(os.path.join((os.path.dirname(main_pathh)),"dummy_folder"))
+        os.mkdir(os.path.join((os.path.dirname(main_path)),"dummy_folder"))
+        os.system("attrib +h "+ '"'+os.path.join(main_path,'dummy_folder')+'"')
     if appconfig == (False):
-        open(os.path.join(main_path,"autogenarated_files","AppConfiguration.json"),"a").close()
+        open(os.path.join(main_path,"AppConfiguration.json"),"a").close()
+        os.system("attrib +h "+ '"'+os.path.join(main_path,'AppConfiguration.json')+'"')
+        dictionary = {
+            'version':'v1.0.0',
+            'command_history':0,
+            'counter':None,
+            'open_file_npp':None,
+            'priority_list':None,
+            'prio_status':None,
+            'start_time':None,
+            'last_time':None,
+            'visit_count':0,
+            'visit_yesterday':0}
+        json_object = json.dumps(dictionary,indent=4)
+        f = open(os.path.join(main_path,"AppConfiguration.json"),"a")
+        f.write(json_object)
+        f.close()
+    if os.stat(os.path.join(main_path,"AppConfiguration.json")).st_size == 0:
+        dictionary = {
+            'version':'v1.0.0',
+            'command_history':0,
+            'counter':None,
+            'open_file_npp':None,
+            'priority_list':None,
+            'prio_status':None,
+            'start_time':None,
+            'last_time':None,
+            'visit_count':0,
+            'visit_yesterday':0}
+        json_object = json.dumps(dictionary,indent=4)
+        f = open(os.path.join(main_path,"AppConfiguration.json"),"a")
+        f.write(json_object)
+        f.close()
 
 def refresh_x(self):
     win32api.keybd_event(0x5B, 0, ) # LWIN
@@ -333,18 +359,19 @@ def write_time():
     start_time = time.time()
     now = datetime.now()
     time_note =now.strftime("%I:%M %p")
-    json_object = json.dumps(start_time,indent=4)
-    with open ((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"r") as f:
+    with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
         data = json.load(f)
-    data["start_time"] = start_time
-    data["last_time"] = time_note
-    with open((os.path.join(main_path,"autogenarated_files","AppConfiguration.json")),"w") as f:
-        json.dump(data, f,indent=4)
+    change = {"start_time":start_time,"last_time":time_note}
+    data.update(change)
+    with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
+        g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
+        g.truncate(0)
+        json.dump(data,f,indent=4)
 
 def read_visited_time():
     time.time()
     end_time = time.time()
-    f = open(os.path.join(main_path,"autogenarated_files","AppConfiguration.json"))
+    f = open(os.path.join(main_path,"AppConfiguration.json"))
     y = json.load(f)
     start = y['start_time']
     last_time = y['last_time']
@@ -363,7 +390,4 @@ def wifi(self):
     elif " on" in self:
         os.system("netsh wlan connect name=Nidhi")
     else:
-        print("ONLY ACCEPTS ON OR OFF")
-    
-
-    
+        print("ONLY ACCEPTS ON OR OFF")  
