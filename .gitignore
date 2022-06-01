@@ -3,3 +3,4 @@ __pycache__
 autogenarated_files/
 tracker/
 bugs&features.docx
+AppConfiguration.json
