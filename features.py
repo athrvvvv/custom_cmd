@@ -144,14 +144,18 @@ def greet_sentence():
         print()
 
 def greet():
-    datee = date.today()
-    dateee = str(datee)
-    check_file = os.path.exists(os.path.join(main_path,"autogenarated_files",dateee+".txt"))
-    if check_file == (False):
-        os.system("echo "+dateee+" >> "+(os.path.join(main_path,"autogenarated_files",dateee+".txt")))   
-        f = open(os.path.join(main_path,"autogenarated_files",dateee+".txt"), "w")
-        f.write("GREETED...!!")
-        greet_sentence()
+    today = date.today()
+    with open((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+        data = json.load(f)
+        greet_stat = data["greet_status"]
+        if greet_stat != str(today):
+            y = {"greet_status":str(today)}
+            data.update(y)
+            with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
+                g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
+                g.truncate(0)
+                json.dump(data,f,indent=4)
+                greet_sentence()
         
 def visit_counter(self):
     if self == ("tell"):
@@ -196,6 +200,7 @@ def com(self):
     os.system("start brave "+self)
 
 def check_AppConfig():
+    yesterday = date.today() - timedelta(days = 1 )
     tracker = os.path.exists(os.path.join(main_path,'tracker'))
     imp_code = os.path.exists(os.path.join(main_path.replace("\custom_cmd",""),"imp_code"))
     dummy_folder = os.path.exists(os.path.join((os.path.dirname(main_path)),"dummy_folder"))
@@ -221,7 +226,8 @@ def check_AppConfig():
             'start_time':None,
             'last_time':None,
             'visit_count':0,
-            'visit_yesterday':0}
+            'visit_yesterday':0,
+            'greet_status':str(yesterday)}
         json_object = json.dumps(dictionary,indent=4)
         f = open(os.path.join(main_path,"AppConfiguration.json"),"a")
         f.write(json_object)
@@ -237,7 +243,8 @@ def check_AppConfig():
             'start_time':None,
             'last_time':None,
             'visit_count':0,
-            'visit_yesterday':0}
+            'visit_yesterday':0,
+            'greet_status':str(yesterday)}
         json_object = json.dumps(dictionary,indent=4)
         f = open(os.path.join(main_path,"AppConfiguration.json"),"a")
         f.write(json_object)
