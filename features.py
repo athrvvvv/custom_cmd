@@ -143,32 +143,18 @@ def greet_sentence():
         print("Hello, Today is "+day+" of "+date+"TH "+month+" "+year+" :)")
         print()
 
-def greet():
-    today = date.today()
-    with open((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
-        data = json.load(f)
-        greet_stat = data["greet_status"]
-        if greet_stat != str(today):
-            y = {"greet_status":str(today)}
-            data.update(y)
-            with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
-                g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
-                g.truncate(0)
-                json.dump(data,f,indent=4)
-                greet_sentence()
-        
 def visit_counter(self):
     if self == ("tell"):
         with open((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
             data = json.load(f)
-            count_int = int(data["visit_count"])
+            count_int = data["visit_count"]
             print("CUSTOM_CMD was opened "+str(count_int)+" times yesterday :)")
             data["visit_count"] = 0
-            data["visit_yesterday"] = str(count_int)
+            data["visit_yesterday"] = count_int
             with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
                 g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
                 g.truncate(0)
-                json.dump(data, f,indent=4)
+                json.dump(data,f,indent=4)
     elif self == ("count"):
         with open((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
             data = json.load(f)
@@ -187,14 +173,20 @@ def visit_counter(self):
             print("CUSTOM_CMD was opened "+str(count_today)+" times today :)")
             print("CUSTOM_CMD was opened "+str(count_yesterday)+" times yesterday :)")
 
-def del_greet_file():
+def greet():
     today = date.today()
-    yesterdayy = today - timedelta(days = 1)
-    yesterday = str(yesterdayy)
-    check_file = os.path.exists(os.path.join(main_path,"autogenarated_files",yesterday+".txt"))
-    if check_file == (True):
-        os.system("del /f "+(os.path.join(main_path,"autogenarated_files",yesterday+".txt")))
-        visit_counter("tell")
+    with open((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+        data = json.load(f)
+        greet_stat = data["greet_status"]
+        if greet_stat != str(today):
+            visit_counter("tell")
+            y = {"greet_status":str(today)}
+            data.update(y)
+            with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
+                g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
+                g.truncate(0)
+                json.dump(data,f,indent=4)
+                greet_sentence()
 
 def com(self):
     os.system("start brave "+self)
@@ -251,24 +243,12 @@ def check_AppConfig():
         f.close()
 
 def refresh_x(self):
-    win32api.keybd_event(0x5B, 0, ) # LWIN
-    win32api.keybd_event(0x44, 0, ) # D
+    win32api.keybd_event(0x5B, 0, )
+    win32api.keybd_event(0x44, 0, )
     for i in range (self):
         keyboard.send("F5")
         time.sleep(0.2)
     pyautogui.hotkey("win","d")
-
-def copy_files(self):
-    check_file = os.path.exists(os.path.join(main_path,"autogenarated_files",self))
-    if check_file == (False):
-        print("ALERT WARNING FILE MISSING !?")     
-    else: 
-        thing = os.path.join(main_path,"autogenarated_files",self)
-        with open (thing,"r") as file:
-            lines = file.read().split()
-            length_of_file = len(lines)
-    ## IMPLEMENT the javascript method :)
-
 
 def writer():
     check_file = os.path.exists(os.path.join(main_path,'autogenarated_files','writing.txt'))

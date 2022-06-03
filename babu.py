@@ -44,7 +44,10 @@ print("Startup took %.2f seconds" % (timestamp22 - timestamp12))
 while True:
     val = input(commands.choice_command).lower().strip()
     features.auto_bs_search(val)
-    features.write_empty("check_count")
+    try:
+        features.write_empty("check_count")
+    except:
+        pass
     if val == ("cls"):
         startfile.clear_console()
             
@@ -58,6 +61,7 @@ while True:
         startfile.sleep1() 
 
     elif val == ("bye") or val == ("shutdown"):
+        features.write_time()
         startfile.shutdown()
 
     elif val == ("whatsapp"):    
