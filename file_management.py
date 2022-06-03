@@ -20,9 +20,8 @@ class MyCompleter(object):
         try: 
             return self.matches[state]
         except IndexError:
-
             return None
-            
+                       
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
 
@@ -36,7 +35,8 @@ def completer_on():
 #LIST OF WORD DOCUMENTS
 def listdir_word():
     # Input from User
-    filenames = os.listdir(r"C:\Users\athar\OneDrive\Documents\word_docs")
+    dir = (r"C:\Users\athar\OneDrive\Documents\word_docs")
+    filenames = os.listdir(dir)
     print("")
     for filename in filenames:
         print(filename)
@@ -45,27 +45,26 @@ def listdir_word():
     readline.set_completer(completer.complete)
     readline.parse_and_bind('tab: complete')
     print()
-    ask_for_it = input("TYPE FILENAME: ")  
+    ask_for_it = input("TYPE FILENAME: ").lower() 
     print()
     if ask_for_it == ("r "+ask_for_it.replace("r ","")):
-        my_text = docx2txt.process(r'C:/Users/athar/OneDrive/Documents/word_docs/' + ask_for_it.replace("r ",""))
+        my_text = docx2txt.process(dir+ ask_for_it.replace("r ",""))
         print(my_text)
     elif ask_for_it == (""):
-        os.system(r"start C:\Users\athar\OneDrive\Documents\word_docs")
+        os.startfile(dir)
     elif ask_for_it == ("new"):
         print()
         input01 = input("ENTER FILENAME: ")
         print()
-        #input02 = input("WANNA ADD HEADING: ")
         if input01 == (""):
             print()
             StopIteration()
         else:
-            filepath = (r"C:\Users\athar\OneDrive\Documents\word_docs/"+input01+".docx")
-            #doc.add_heading(input02, 0)
+            filepath = (os.path.join(dir,input01,".docx"))
             doc.save(filepath)
             print("OPEN (O) EXIT ()")
-            option = input_source.getkey()
+            optionn = input_source.getkey()
+            option = optionn.lower()
             if option == ("o"):
                 os.startfile(filepath)
                 print()
@@ -73,12 +72,11 @@ def listdir_word():
                 print()
                 print("EXIT")
                 print()
-
     else:
         completer = MyCompleter(filenames)
         readline.set_completer(completer.complete)
         readline.parse_and_bind('tab: complete')
-        input_path = (r'C:/Users/athar/OneDrive/Documents/word_docs/' + ask_for_it)
+        input_path = (dir+ ask_for_it)
         check_file = os.path.isfile(input_path)
         if check_file == (True):
             os.startfile(input_path)
@@ -88,13 +86,14 @@ def listdir_word():
     
 #CREATE DUMMY PYTHON FILES
 def dummy_file():
+    dir_name = os.path.join(os.path.dirname(str(main_path)),"dummy_folder")
     now = datetime.now()
-    space = " "
     current_time = now.strftime("%b_%d_%I.%M.%S")
-    open(("C:/Users/athar/OneDrive/Documents/projects/dummy_folder/"+current_time+".py"),"w").close()
-    os.popen('"'+"C:/Progra~1/Notepad++/notepad++.exe"+'"'+space+'"'+"C:/Users/athar/OneDrive/Documents/projects/dummy_folder/"+current_time+".py"+'"')
+    open(os.path.join(dir_name,(current_time+".py")),"w").close()
+    os.popen("start notepad++ "+'"'+(os.path.join(dir_name,(current_time+".py")))+'"')
 
-def custom_dummy_file(self):
+#CREATE DUMMY CUSTOMIZE PYTHON FILES 
+def custom_dummy_file(self):    
     check_self = os.path.exists(os.path.join((main_path.replace("\custom_cmd","")),"imp_code",(self+".py")))
     if self == "":
         StopIteration()
@@ -115,45 +114,9 @@ def delete_dummy():
     for filename in filenames:
         os.remove(os.path.join(path,filename))
         
-#CREATING NEW DIR FROM CMD
-def newfolder():
-    try:
-        where_folder, folder_name = input("LOCALITY-FOLDER: ").split()
-        if where_folder == ("projects"):
-            os.makedirs("C:/Users/athar/OneDrive/Documents/projects/"+folder_name)
-            print("VS CODE OPEN (Y) SIMPLE OPEN (S) EXIT ()")
-            print("")
-            ask_for_opening = input_source.getkey()
-            if ask_for_opening == ("s") or ask_for_opening == ("S"):
-                os.startfile("C:/Users/athar/OneDrive/Documents/projects/"+folder_name)
-                exit
-            if ask_for_opening == ("y") or ask_for_opening == ("Y"):
-                os.system("code "+"C:/Users/athar/OneDrive/Documents/projects/"+folder_name)
-                exit
-            if ask_for_opening == (""):
-                print("C'mon")
-                exit
-        if where_folder == ("desktop"):
-            os.makedirs("C:/Users/athar/OneDrive/Desktop/"+folder_name)
-            os.startfile("C:/Users/athar/OneDrive/Desktop/"+folder_name)
-            
-        if where_folder == ("download"):
-            os.makedirs("C:/Users/athar/OneDrive/Download/"+folder_name)
-            os.startfile("C:/Users/athar/OneDrive/Download/"+folder_name)
-
-        if where_folder == ("document"):
-            os.makedirs("C:/Users/athar/OneDrive/Documents/"+folder_name)
-            os.startfile("C:/Users/athar/OneDrive/Documents/"+folder_name)
-        
-    except:
-        pass
-        print("")
-        print("IT WAS STRANGE..!")
-        print("")
-
 #SUB-PROJECT SELECTER (PS FUNCTION)
-def subproject():
-    path = (r"C:\Users\athar\OneDrive\Documents\projects")
+def subproject(self):
+    path = (r"C:\Users\athar\OneDrive\Documents/"+self)
     filenames = os.listdir(path)
     print("")
     for filename in filenames:
@@ -176,13 +139,13 @@ def subproject():
             if check_cache == (True):
                 shutil.rmtree(os.path.join(path,dir_name,"__pycache__"))
     elif input1 == (""):
-        os.system("start " r"C:\Users\athar\OneDrive\Documents\projects")
+        os.system("start "+path)
     elif input1 == ("q"):
         StopIteration()
     # OPENS CMD IN SPECIFIC DIR
     elif " cmd" in input1:
         temp = input1.replace(" cmd","")
-        b = (r"C:\Users\athar\OneDrive\Documents\projects/"+temp)
+        b = (os.path.join(path,temp))
         check_file = os.path.exists(b)
         if check_file == (True):
             os.system("start cmd /K cd "+b)
@@ -193,7 +156,7 @@ def subproject():
     # OPENS GIT IN SPECIFIC DIR
     elif " git" in input1:
         temp = input1.replace(" git","")
-        b = (r"C:\Users\athar\OneDrive\Documents\projects/"+temp)
+        b = (os.path.join(path,temp))
         check_file = os.path.exists(b)
         if check_file == (True):
             os.popen(('"'+"C:\Program Files\Git\git-bash.exe"+'" '+"--cd="+'"'+b+'"'))
@@ -201,6 +164,7 @@ def subproject():
             print()
             print("FALSE DIR")
             print()
+            
     # OPEN FOLDERS IN VS CODE
     elif " vs" in input1:
         temp = input1.replace(" vs","")
@@ -342,7 +306,7 @@ def subproject():
                         print()
             else:
                 with open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'w') as writer:
-                    writer.write(" "+filename_to_open)
+                    writer.write(" "+filename_to_open.strip())
                 with open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'r') as writer:
                     number_of_files = 0
                     data = writer.read()
@@ -378,7 +342,8 @@ def subproject():
                                 print("IGNORED SOME PSEUDO FILES")
                         print()                                 
     elif " bf" in input1:
-        dir_name = input1.replace(" bf","")
+        input_no_spaces = ("".join(input1.split(" ")))
+        dir_name = input_no_spaces.replace("bf","")
         check_bf = os.path.exists(os.path.join(path,dir_name,"bugs&features.docx"))
         if check_bf == (True): 
             os.startfile(os.path.join(path,dir_name,"bugs&features.docx"))
@@ -391,7 +356,7 @@ def subproject():
             print() 
             os.startfile(os.path.join(path,dir_name,"bugs&features.docx"))
     else:
-        a = (r"C:\Users\athar\OneDrive\Documents\projects/"+input1)
+        a = (os.path.join(path,input1))
         check_dir = os.path.isdir(a)
         if check_dir == (True):
             os.startfile(a)
@@ -425,7 +390,7 @@ def nmf():
     else:
         checkfile = os.path.exists(os.path.join(project,input1))
         with open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'w') as writer:
-            writer.write(" "+input1)
+            writer.write(" "+input1.strip())
         with open(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd\autogenarated_files\open_file_npp.txt", 'r') as writer:
             number_of_files = 0
             data = writer.read()
