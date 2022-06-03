@@ -97,7 +97,6 @@ def status_writer(self):
     status.write(self)
     count_on()
 
-
 # Main tracker
 def tracker():
     # Take this input from user
