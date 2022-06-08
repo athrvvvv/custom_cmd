@@ -9,7 +9,7 @@ import features
 import startfile
 import tracking_master 
 import gui_applications 
-import os, readline
+import os, readline, re
 
 readline.set_completer(commands.completer.complete)
 readline.parse_and_bind('tab: complete')
@@ -40,7 +40,8 @@ timestamp22 = time.time()
 print("Startup took %.2f seconds" % (timestamp22 - timestamp12))
 
 while True:
-    val = input(commands.choice_command).lower().strip()
+    inp = input(commands.choice_command).lower()
+    val=(re.compile(r'[^a-zA-Z-)]').sub(" ",inp)).strip()
     features.auto_bs_search(val)
     features.write_empty("check_count")
     if val == ("cls"):
