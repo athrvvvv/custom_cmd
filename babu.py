@@ -20,10 +20,8 @@ features.maximize()
 # GREETING
 features.greet_time()
 # LAST VISITED TIME
-try:
-    features.read_visited_time()
-except:
-    pass
+try: features.read_visited_time()
+except: pass
 # WRITING CURRENT TIME
 features.write_time()
 # REGISTER OPENING OF APP
@@ -36,7 +34,7 @@ tracking_master.count_on()
 scheduler.check_prio_status()
 # TELLING TODO LIST
 scheduler.check_todo_status()
-
+features.write_empty("clear")
 main_path = os.path.dirname(__file__)
 timestamp22 = time.time()
 print("Startup took %.2f seconds" % (timestamp22 - timestamp12))
@@ -44,13 +42,10 @@ print("Startup took %.2f seconds" % (timestamp22 - timestamp12))
 while True:
     val = input(commands.choice_command).lower().strip()
     features.auto_bs_search(val)
-    try:
-        features.write_empty("check_count")
-    except:
-        pass
+    features.write_empty("check_count")
     if val == ("cls"):
-        startfile.clear_console()
-            
+        os.system("cls")
+    
     elif val == ("exit"):
         os._exit(0)
 
@@ -108,9 +103,6 @@ while True:
 
     elif val == ("reopen"):
         startfile.restart_terminal()
-
-    elif val == ("path"):
-        startfile.your_path()
 
     elif val == ("opcmd"):
         startfile.open_current_in_cmd()
@@ -285,9 +277,6 @@ while True:
     elif val == "whatsappp":
         startfile.whatsapp_stable()
 
-    elif val == ("re"):
-        features.reload_babu()
-    
     elif val == ("tracker-"):
         tracking_master.tracker_on()
 
@@ -316,5 +305,8 @@ while True:
     elif val == ("log"):
         features.visit_counter("log")
     
-    elif "wifi- " in val:
+    elif ("wifi- ") in val:
         features.wifi(val)
+    
+    elif val == ("start ."):
+        os.startfile(main_path)
