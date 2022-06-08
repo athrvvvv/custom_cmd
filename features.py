@@ -1,7 +1,6 @@
 import os,pygetwindow, time, psutil, json
 from datetime import datetime, date, timedelta
 import win32gui, win32con, win32api ,keyboard, pyautogui
-from importlib import reload
 main_path = str(os.path.dirname(__file__))
 profile = os.environ['USERPROFILE']
 
@@ -109,6 +108,16 @@ def write_empty(self):
             print()
             time.sleep(3)
             exit()
+    elif self == ("clear"):
+        with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+            data = json.load(f)
+            count_number = data["command_history"]
+            y = {"command_history":0}
+            data.update(y)
+        with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
+            g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
+            g.truncate(0)
+            json.dump(data,f,indent=4)
 
 def greet_sentence():
     now = datetime.now()
@@ -144,18 +153,7 @@ def greet_sentence():
         print()
 
 def visit_counter(self):
-    if self == ("tell"):
-        with open((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
-            data = json.load(f)
-            count_int = data["visit_count"]
-            print("CUSTOM_CMD was opened "+str(count_int)+" times yesterday :)")
-            data["visit_count"] = 0
-            data["visit_yesterday"] = count_int
-            with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
-                g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
-                g.truncate(0)
-                json.dump(data,f,indent=4)
-    elif self == ("count"):
+    if self == ("count"):
         with open((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
             data = json.load(f)
         count = data["visit_count"] + 1
@@ -179,7 +177,6 @@ def greet():
         data = json.load(f)
         greet_stat = data["greet_status"]
         if greet_stat != str(today):
-            visit_counter("tell")
             y = {"greet_status":str(today)}
             data.update(y)
             with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
@@ -197,6 +194,12 @@ def check_AppConfig():
     imp_code = os.path.exists(os.path.join(main_path.replace("\custom_cmd",""),"imp_code"))
     dummy_folder = os.path.exists(os.path.join((os.path.dirname(main_path)),"dummy_folder"))
     appconfig = os.path.exists(os.path.join(main_path,"AppConfiguration.json"))
+    check_prio = os.path.isfile(os.path.join(main_path,"autogenarated_files","priority_list.txt"))
+    check_qn = os.path.isfile(os.path.join(main_path,"autogenarated_files","quick_note.txt"))
+    if check_qn == (False):
+        open((os.path.join(main_path,"autogenarated_files","quick_note.txt")),"w").close()
+    if check_prio == (False):
+        open((os.path.join(main_path,"autogenarated_files","priority_list.txt")),"w").close()
     if tracker == (False):
         os.mkdir(os.path.join(main_path,'tracker'))
         os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
@@ -213,13 +216,14 @@ def check_AppConfig():
             'command_history':0,
             'counter':None,
             'open_file_npp':None,
-            'priority_list':None,
+            'todo_status':None,
             'prio_status':None,
             'start_time':None,
             'last_time':None,
             'visit_count':0,
             'visit_yesterday':0,
-            'greet_status':str(yesterday)}
+            'greet_status':str(yesterday),
+            'MSWORD':None}
         json_object = json.dumps(dictionary,indent=4)
         f = open(os.path.join(main_path,"AppConfiguration.json"),"a")
         f.write(json_object)
@@ -230,18 +234,19 @@ def check_AppConfig():
             'command_history':0,
             'counter':None,
             'open_file_npp':None,
-            'priority_list':None,
+            'todo_status':None,
             'prio_status':None,
             'start_time':None,
             'last_time':None,
             'visit_count':0,
             'visit_yesterday':0,
-            'greet_status':str(yesterday)}
+            'greet_status':str(yesterday),
+            'MSWORD':None}
         json_object = json.dumps(dictionary,indent=4)
         f = open(os.path.join(main_path,"AppConfiguration.json"),"a")
         f.write(json_object)
         f.close()
-
+        
 def refresh_x(self):
     win32api.keybd_event(0x5B, 0, )
     win32api.keybd_event(0x44, 0, )
@@ -277,31 +282,7 @@ def writer():
                 now_timee = datetime.now()
                 time =now_timee.strftime("%I:%M %p")
                 f.write("\n"+"------------------------------------------------------------"+"\n"+date+"\n"+input1+" - "+time)
-
-def reload_babu_config():
-    import babu
-    import scheduler
-    import file_management
-    import cleaner
-    import commands
-    import password_generator
-    import features
-    import startfile
-    import tracking_master
-    reload(babu)
-    reload(scheduler)
-    reload(file_management)
-    reload(cleaner)
-    reload(commands)
-    reload(password_generator)
-    reload(features)
-    reload(startfile)
-    reload(tracking_master)
-    
-def reload_babu():
-    for i in range (20):
-        reload_babu_config()
-
+                
 def bluetooth(self):
     selff = self.strip()
     if selff == "on":
@@ -326,12 +307,12 @@ def auto_bs_search(self):
 def greet_time():
     current_hour = int(datetime.now().strftime('%H'))
     if current_hour >= 5 and current_hour <= 12:
-        print('Good morning!')
+        print('Good Morning..')
         print()
     elif current_hour >=23 and current_hour >=5:
         print("You should sleep now")
     elif 12<=current_hour<=18:
-        print('Good afternoon!')
+        print('Good Afternoon..')
         print()
     else:
         print('Good Evening..')
