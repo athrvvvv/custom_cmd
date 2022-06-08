@@ -3,7 +3,8 @@ import os,winshell, shutil
 def clean_bin():
     #os.system("rd /s /q %systemdrive%\$Recycle.bin")
     #WITH DUST
-    winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
+    try: winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
+    except: pass
     #NO DURST
 
 def clean_temp():
