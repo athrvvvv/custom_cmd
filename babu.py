@@ -41,7 +41,7 @@ print("Startup took %.2f seconds" % (timestamp22 - timestamp12))
 
 while True:
     inp = input(commands.choice_command).lower()
-    val=(re.compile(r'[^a-zA-Z-)]').sub(" ",inp)).strip()
+    val=(re.compile(r'[^a-zA-Z-).]').sub(" ",inp)).strip()
     features.auto_bs_search(val)
     features.write_empty("check_count")
     if val == ("cls"):
@@ -266,7 +266,7 @@ while True:
     
     elif "x" in val:
         try:
-            answer = val.replace("x","")
+            answer = inp.replace("x","")
             ans = int(answer)
             features.refresh_x(ans)
         except:
