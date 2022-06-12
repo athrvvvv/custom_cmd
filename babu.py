@@ -179,11 +179,8 @@ while True:
         scheduler.todo()
     
     elif val == ("ps"):
-        file_management.subproject("projects")
-    
-    elif val == ("ec"):
-        file_management.subproject("external_codes")
-    
+        file_management.subproject(val.upper())
+        
     elif val == ("yt"):
         startfile.youtubewa()
     
@@ -311,3 +308,6 @@ while True:
     
     elif val == ("start ."):
         os.startfile(main_path)
+    
+    elif val == ("re"):
+        features.reload_babu()
