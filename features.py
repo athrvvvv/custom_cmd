@@ -210,7 +210,7 @@ def check_AppConfig():
         os.mkdir(os.path.join(main_path,'tracker'))
         os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
     if imp_code == (False):
-        os.mkdir(os.path.join(main_path.replace("\custom_cmd",""),"imp_code"))
+        os.mkdir(os.path.join((os.path.dirname(main_path)),"imp_code"))
     if dummy_folder == (False):
         os.mkdir(os.path.join((os.path.dirname(main_path)),"dummy_folder"))
         os.system("attrib +h "+ '"'+os.path.join(main_path,'dummy_folder')+'"')
