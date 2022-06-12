@@ -1,6 +1,5 @@
 import os, sys
-import file_management
-import cleaner
+import file_management, cleaner, features
 
 def dn_files():
     os.system("start %userprofile%\Downloads")
@@ -11,13 +10,14 @@ def zoom():
 def restart():
     os.system("shutdown /r /t 0")
     os.system("taskkill /im python.exe /f")
-    os._exit(1)
+    os._exit(0)
 
 def shutdown():
     file_management.delete_dummy()
     cleaner.clean_temp()
+    features.visit_counter("count")
     os.system("shutdown /s /t 0")
-    os._exit(1)
+    os._exit(0)
 
 def sleep1():
     cleaner.clean_temp()  
@@ -41,9 +41,6 @@ def code0():
 def brave():
     os.system("start brave")
 
-def clear_console():
-    os.system('cls')
-
 def pip(self):
     try:
         os.system(self)
@@ -64,10 +61,7 @@ def open_word_folder():
     
 def restart_terminal():
     os.startfile(r"C:\Users\athar\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\babu.bat")
-    sys.exit("BYEEEE")
-
-def your_path():
-    os.startfile(r"C:\Users\athar\OneDrive\Documents\projects\custom_cmd")
+    os._exit(0)
 
 def open_current_in_cmd():
     os.startfile(r"C:\Users\athar\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\babu.bat")
@@ -135,5 +129,7 @@ def fdm():
 
 def vsdc():
     os.system("explorer shell:appsFolder\{6D809377-6AF0-444B-8957-A3773F02200E}\FlashIntegro\VideoEditor\VideoEditor.exe")
+
+
 
 

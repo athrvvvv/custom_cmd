@@ -19,7 +19,6 @@ class MyCompleter(object):
         try: 
             return self.matches[state]
         except IndexError:
-
             return None
             
 def completer_on():
