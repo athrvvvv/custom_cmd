@@ -1,12 +1,12 @@
-import os,pygetwindow, time, psutil, json
+import os,pygetwindow, time, psutil, json, importlib
 from datetime import datetime, date, timedelta
 import win32gui, win32con, win32api ,keyboard, pyautogui
-main_path = str(os.path.dirname(__file__))
+main_path = os.path.dirname(__file__)
 profile = os.environ['USERPROFILE']
 
 def current_time():
     now = datetime.now()
-    time =now.strftime("%I:%M %p")
+    time =now.strftime("%I:%M:%S %p")
     print()
     print("CURRENT TIME: ",time)
     print()
@@ -46,10 +46,8 @@ def cmd_command():
     if input1 == (""):
         StopIteration()
     else:
-        try:
-            os.system(input1)
-        except:
-            pass
+        try: os.system(input1)
+        except: pass
 
 def yt():
     os.system("start brave youtube.com")
@@ -194,12 +192,20 @@ def check_AppConfig():
     imp_code = os.path.exists(os.path.join(main_path.replace("\custom_cmd",""),"imp_code"))
     dummy_folder = os.path.exists(os.path.join((os.path.dirname(main_path)),"dummy_folder"))
     appconfig = os.path.exists(os.path.join(main_path,"AppConfiguration.json"))
+    path_json = os.path.exists(os.path.join(main_path,"paths.json"))
     check_prio = os.path.isfile(os.path.join(main_path,"autogenarated_files","priority_list.txt"))
     check_qn = os.path.isfile(os.path.join(main_path,"autogenarated_files","quick_note.txt"))
+    auto_files = os.path.exists(os.path.join(main_path,"autogenarated_files"))
+    check_todo = os.path.isfile(os.path.join(main_path,"autogenarated_files","todo.txt"))
+    if auto_files == (False):
+        os.mkdir(os.path.join(main_path,"autogenarated_files"))
+        os.system("attrib +h "+ '"'+os.path.join(main_path,'autogenarated_files')+'"')
     if check_qn == (False):
         open((os.path.join(main_path,"autogenarated_files","quick_note.txt")),"w").close()
     if check_prio == (False):
         open((os.path.join(main_path,"autogenarated_files","priority_list.txt")),"w").close()
+    if check_todo == (False):
+        open((os.path.join(main_path,"autogenarated_files","todo.txt")),"w").close()
     if tracker == (False):
         os.mkdir(os.path.join(main_path,'tracker'))
         os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
@@ -222,8 +228,7 @@ def check_AppConfig():
             'last_time':None,
             'visit_count':0,
             'visit_yesterday':0,
-            'greet_status':str(yesterday),
-            'MSWORD':None}
+            'greet_status':str(yesterday)}
         json_object = json.dumps(dictionary,indent=4)
         f = open(os.path.join(main_path,"AppConfiguration.json"),"a")
         f.write(json_object)
@@ -240,10 +245,17 @@ def check_AppConfig():
             'last_time':None,
             'visit_count':0,
             'visit_yesterday':0,
-            'greet_status':str(yesterday),
-            'MSWORD':None}
+            'greet_status':str(yesterday)}
         json_object = json.dumps(dictionary,indent=4)
         f = open(os.path.join(main_path,"AppConfiguration.json"),"a")
+        f.write(json_object)
+        f.close()
+    if path_json == (False):
+        open(os.path.join(main_path,"paths.json"),"a").close()
+        os.system("attrib +h "+ '"'+os.path.join(main_path,'paths.json')+'"')
+        dictionary = {}
+        json_object = json.dumps(dictionary,indent=4)
+        f = open(os.path.join(main_path,"paths.json"),"a")
         f.write(json_object)
         f.close()
         
@@ -359,3 +371,7 @@ def wifi(self):
         os.system("netsh wlan connect name=Nidhi")
     else:
         print("ONLY ACCEPTS ON OR OFF")  
+
+def reload_babu():
+    import babu
+    importlib.reload(babu)
