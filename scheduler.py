@@ -1,9 +1,8 @@
-import os
+import os, json
 import WConio2 as input_source
 from datetime import date
 now = date.today()
 str_today = str(now)
-
 main_path = os.path.dirname(__file__)
 
 def priority_reader():
@@ -20,37 +19,45 @@ def priority_reader():
 
 def set_on_off_prio(self):
     if self == "prio-":
-        with open((os.path.join(main_path,"autogenarated_files","prio_status.txt")), "r") as f:
-            data = f.read()
-            if data == ("on"):
-                print("PRIORITY LIST DISPLAYING AT STARTUP: ON")
-            elif data == ("off"):
-                print("PRIORITY LIST DISPLAYING AT STARTUP: OFF")
-            else:
-                print("None")
+        with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+            data = json.load(f)
+            status = data["prio_status"]
+        if status == (True):
+            print("PRIORITY LIST DISPLAYING AT STARTUP: ON")
+        elif status == (False):
+            print("PRIORITY LIST DISPLAYING AT STARTUP: OFF")
+        else:
+            print("None")
     else:
         parcel = self.replace("prio-","").lower()
         if parcel == ("on") or parcel == ("off"):
-            with open((os.path.join(main_path,"autogenarated_files","prio_status.txt")), "w") as f:
-                f.write(parcel)
-                print("Priority list Status Updated")
+            with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+                data = json.load(f)
+                if parcel == ("on"):
+                    change = {"prio_status":True}
+                elif parcel == ("off"):
+                    change = {"prio_status":False}
+            data.update(change)
+            with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
+                g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
+                g.truncate(0)
+                json.dump(data,f,indent=4)
+                print("Priority list Status Updated TO "+parcel.upper())
         else:
-            ("You can only set status to ON or OFF")
+            print("You can only set status to ON or OFF")
         
 def check_prio_status():
-    with open((os.path.join(main_path,"autogenarated_files","prio_status.txt")), "r") as f:
-        read = f.read()
-        if read == ("on"):
-            priority_reader()
-        elif read == ("off"):
-            StopIteration()
-        else:
-            priority_reader()
+    with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+            data = json.load(f)
+            status = data["prio_status"]
+            if status == (True):
+                priority_reader()
+            elif status == (False):
+                pass
+            else:
+                priority_reader()
             
 def priority_list():
-    check_file = os.path.isfile(os.path.join(main_path,"autogenarated_files","priority_list.txt"))
-    if check_file == (False):
-        open((os.path.join(main_path,"autogenarated_files","priority_list.txt")),"w").close()
     with open((os.path.join(main_path,"autogenarated_files","priority_list.txt")),"r") as f:
         print("PRIORITY AS BELOW:- ")
         data = f.read()
@@ -63,7 +70,6 @@ def priority_list():
             if not_space:
                 print("{}. {}".format(count, line.strip()))
     print()
-    
     if number_of_characters == 0:
         print()
         print("EMPTY FILE AF")
@@ -107,9 +113,6 @@ def priority_list():
                 np_file.write(input0+ "\n")
 
 def quick_note():
-    check_file = os.path.isfile(os.path.join(main_path,"autogenarated_files","quick_note.txt"))
-    if check_file == (False):
-        open((os.path.join(main_path,"autogenarated_files","quick_note.txt")),"w").close()
     with open((os.path.join(main_path,"autogenarated_files","quick_note.txt")),"r") as np_file:    
             data = np_file.read()
             number_of_characters = len(data)
@@ -168,32 +171,43 @@ def todo_reader():
 
 def set_on_off_todo(self):
     if self == "todo-":
-        with open((os.path.join(main_path,"autogenarated_files","todo_status.txt")), "r") as f:
-            data = f.read()
-            if data == ("on"):
-                print("TODO LIST DISPLAYING AT STARTUP: ON")
-            elif data == ("off"):
-                print("TODO LIST DISPLAYING AT STARTUP: OFF")
-            else:
-                print("None")
+        with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+            data = json.load(f)
+            status = data["todo_status"]
+        if status == (True):
+            print("TODO LIST DISPLAYING AT STARTUP: ON")
+        elif status == (False):
+            print("TODO LIST DISPLAYING AT STARTUP: OFF")
+        else:
+            print("None")
     else:
         parcel = self.replace("todo-","").lower()
         if parcel == ("on") or parcel == ("off"):
-            with open((os.path.join(main_path,"autogenarated_files","todo_status.txt")), "w") as f:
-                f.write(parcel)
-                print("Todo list Status Updated")
+            with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+                data = json.load(f)
+            if parcel == ("on"):
+                change = {"todo_status":True}
+            elif parcel == ("off"):
+                change = {"todo_status":False}
+            data.update(change)
+            with open((os.path.join(main_path,"AppConfiguration.json")),"a") as f:
+                g = open((os.path.join(main_path,"AppConfiguration.json")),"r+")
+                g.truncate(0)
+                json.dump(data,f,indent=4)
+                print("Todo list Status Updated TO "+parcel.upper())
         else:
-            ("You can only set status to ON or OFF")
+            print("You can only set status to ON or OFF")
         
 def check_todo_status():
-    with open((os.path.join(main_path,"autogenarated_files","todo_status.txt")), "r") as f:
-        read = f.read()
-        if read == ("on"):
-            todo_reader()
-        elif read == ("off"):
-            StopIteration()
-        else:
-            todo_reader()
+    with open ((os.path.join(main_path,"AppConfiguration.json")),"r") as f:
+            data = json.load(f)
+            status = data["todo_status"]
+            if status == (True):
+                todo_reader()
+            elif status == (False):
+                pass
+            else:
+                todo_reader()
             
 def todo():
     check_file = os.path.isfile(os.path.join(main_path,"autogenarated_files","todo.txt"))
