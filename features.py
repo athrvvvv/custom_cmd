@@ -197,9 +197,12 @@ def check_AppConfig():
     check_qn = os.path.isfile(os.path.join(main_path,"autogenarated_files","quick_note.txt"))
     auto_files = os.path.exists(os.path.join(main_path,"autogenarated_files"))
     check_todo = os.path.isfile(os.path.join(main_path,"autogenarated_files","todo.txt"))
+    check_file = os.path.isfile(os.path.join(main_path,"autogenarated_files","open_file_npp.txt"))
     if auto_files == (False):
         os.mkdir(os.path.join(main_path,"autogenarated_files"))
         os.system("attrib +h "+ '"'+os.path.join(main_path,'autogenarated_files')+'"')
+    if check_file == (False):
+        os.system("echo> "+(os.path.join(main_path,"autogenarated_files","open_file_npp.txt")))
     if check_qn == (False):
         open((os.path.join(main_path,"autogenarated_files","quick_note.txt")),"w").close()
     if check_prio == (False):
@@ -373,5 +376,5 @@ def wifi(self):
         print("ONLY ACCEPTS ON OR OFF")  
 
 def reload_babu():
-    import babu
-    importlib.reload(babu)
+    import file_management
+    importlib.reload(file_management)
