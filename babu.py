@@ -313,3 +313,5 @@ while True:
         features.reload_babu()
 
     elif val == ("ec"): file_management.subproject(val.upper())
+
+    elif val == ("js"): file_management.subproject(val.upper())
