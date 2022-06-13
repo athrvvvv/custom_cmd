@@ -200,8 +200,8 @@ def subproject(self):
                 print("DIR DOES'NT EXISTS :)")
     with open ((os.path.join(main_path,"paths.json")),"r") as f:
         data = json.load(f)
-        path = data[(self+"_PATH")]
-    filenames = os.listdir(path)
+        path_file_in_json = data[(self+"_PATH")]
+    filenames = os.listdir(path_file_in_json)
     print("")
     for filename in filenames:
         print(filename)
@@ -223,7 +223,7 @@ def subproject(self):
             if check_cache == (True):
                 shutil.rmtree(os.path.join(path,dir_name,"__pycache__"))
     elif input1 == (""):
-        os.system("start "+path)
+        os.system("start "+path_file_in_json)
     elif input1 == ("q"):
         StopIteration()
     elif input1 == ("new profile"):
@@ -242,7 +242,7 @@ def subproject(self):
     # OPENS CMD IN SPECIFIC DIR
     elif " cmd" in input1:
         temp = input1.replace(" cmd","")
-        b = (os.path.join(path,temp))
+        b = (os.path.join(path_file_in_json,temp))
         check_file = os.path.exists(b)
         if check_file == (True):
             os.system("start cmd /K cd "+b)
@@ -253,7 +253,7 @@ def subproject(self):
     # OPENS GIT IN SPECIFIC DIR
     elif " git" in input1:
         temp = input1.replace(" git","")
-        b = (os.path.join(path,temp))
+        b = (os.path.join(path_file_in_json,temp))
         check_file = os.path.exists(b)
         if check_file == (True):
             os.popen(('"'+"C:\Program Files\Git\git-bash.exe"+'" '+"--cd="+'"'+b+'"'))
@@ -264,9 +264,9 @@ def subproject(self):
     # OPEN FOLDERS IN VS CODE
     elif " vs" in input1:
         temp = input1.replace(" vs","")
-        isdir = os.path.isdir(path+"/"+temp)
+        isdir = os.path.isdir(path_file_in_json+"/"+temp)
         if isdir == (True):
-            os.system("code "+path+"/"+temp)
+            os.system("code "+path_file_in_json+"/"+temp)
             print()
             StopIteration()
         elif isdir == (False):
@@ -276,9 +276,9 @@ def subproject(self):
     # OPEN PARTICULAR FILES IN VS CODE
     elif " -vs" in input1:
         folder_name_vs = input1.replace(" -vs","")
-        isdir = os.path.isdir(path+"/"+folder_name_vs)
+        isdir = os.path.isdir(path_file_in_json+"/"+folder_name_vs)
         if isdir == (True):
-            folder_origin = (path +"/"+folder_name_vs)
+            folder_origin = (path_file_in_json +"/"+folder_name_vs)
             list01 = os.listdir(folder_origin)
             for filename in list01:
                 print(filename)
@@ -292,7 +292,7 @@ def subproject(self):
                 StopIteration()   
             elif "del " in filename_to_open:
                 temp = filename_to_open.replace("del ","")
-                b = (os.path.join(path,"custom_cmd",temp))
+                b = (os.path.join(path_file_in_json,folder_name_vs,temp))
                 check_file = os.path.exists(b)
                 if check_file == (True):
                     os.remove(b)
@@ -305,7 +305,7 @@ def subproject(self):
                 if new_file == (""):
                     StopIteration()
                 else:
-                    path_of_file = (os.path.join(path,folder_name_vs,(new_file+".py")))
+                    path_of_file = (os.path.join(path_file_in_json,folder_name_vs,(new_file+".py")))
                     check_file_exists = os.path.exists(path_of_file)
                     if check_file_exists == (False):
                         os.system("echo "+'"'+"Happy Coding :)"+'"'+">>" +path_of_file)
@@ -320,9 +320,6 @@ def subproject(self):
                         print("FILE ALREADY EXISTS")  
                         print()    
             else:
-                check_file = os.path.isfile(os.path.join(main_path,"autogenarated_files","open_file_npp.txt"))
-                if check_file == (False):
-                    os.system("echo> "+(os.path.join(main_path,"autogenarated_files","open_file_npp.txt")))
                 with open((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'w') as writer:
                     writer.write(" "+filename_to_open)
                 with open((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'r') as writer:
@@ -344,16 +341,29 @@ def subproject(self):
                             print()                                      
                     else:
                         print(number_of_files,"FILES DETECTED")
-                        with open ((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'r') as replace_file:
-                            path = os.path.join(main_path,folder_name_vs,slash)
-                            reading = replace_file.read()
-                            replacing = reading.replace(" ",(" "+path))
-                        with open ((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'w') as write_file:
-                            write_file.write(replacing)
-                        data_in_file = open((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'r')
-                        reading_data = data_in_file.read()
-                        os.system("code "+reading_data)
-                        print()                                
+                        with open ((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'w') as f:
+                            path = os.path.join(path_file_in_json,folder_name_vs,filename_to_open)
+                            f.write(path)
+                        with open ((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'r') as f:
+                            reading = f.read()
+                            replace_things = reading.replace(" ",(" "+(os.path.join(path_file_in_json,folder_name_vs)+"/")))
+                        with open ((os.path.join(main_path,'autogenarated_files','open_file_npp.txt')), 'w') as write_file:
+                            write_file.write(replace_things)
+                        data_in_file = open((os.path.join(main_path,'autogenarated_files','open_file_npp.txt')), 'r')
+                        reading_data = data_in_file.read().split()
+                        count = 0
+                        for word in reading_data:
+                            is_file = os.path.exists(word)
+                            if is_file == (True):
+                                os.system("code "+word)
+                            elif is_file == (False):
+                                count = count + 1
+                                print_or_not = (True)
+                        try:
+                            if print_or_not == (True):
+                                print("IGNORED {} PSEUDO FILES".format(count))
+                            print()        
+                        except: pass                                                           
     # Track projects shortcut
     elif (" -track") in input1:
         to_track = input1.replace(' -track','')
@@ -367,9 +377,9 @@ def subproject(self):
     # OPENS ANY FILES/DIR IN NPP 
     elif (" np") in input1:
         folder_name_np = input1.replace(" np","")
-        isdir = os.path.isdir(path+"/"+folder_name_np)
+        isdir = os.path.isdir(path_file_in_json+"/"+folder_name_np)
         if isdir == (True):
-            folder_origin = (path +"/"+folder_name_np)
+            folder_origin = (path_file_in_json+"/"+folder_name_np)
             list01 = os.listdir(folder_origin)
             for filename in list01:
                 print(filename)
@@ -383,7 +393,7 @@ def subproject(self):
                 StopIteration()
             elif "del " in filename_to_open:
                 temp = filename_to_open.replace("del ","")
-                b = (os.path.join(path,"custom_cmd",temp))
+                b = (os.path.join(path_file_in_json,"custom_cmd",temp))
                 check_file = os.path.exists(b)
                 if check_file == (True):
                     os.remove(b)
@@ -392,9 +402,9 @@ def subproject(self):
                     print("FALSE FILE")
                     print()   
             elif filename_to_open == ("f"):
-                isdir = os.path.isdir(os.path.join(path,folder_name_np))
+                isdir = os.path.isdir(os.path.join(path_file_in_json,folder_name_np))
                 if isdir == (True):
-                    folder_origin = (os.path.join(path,folder_name_np)) 
+                    folder_origin = (os.path.join(path_file_in_json,folder_name_np)) 
                     os.system("start notepad++ "+folder_origin)
                 else:
                     print()
@@ -440,14 +450,15 @@ def subproject(self):
                             print()                                         
                     else:
                         print(number_of_files,"FILES DETECTED")
-                        with open ((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'r') as replace_file:
-                            slash = "/"
-                            path = main_path+slash+slash
-                            reading = replace_file.read()
-                            replacing = reading.replace(" ",(" "+path))
-                        with open ((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'w') as write_file:
-                            write_file.write(replacing)
-                        data_in_file = open((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'r')
+                        with open ((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'w') as f:
+                            path = os.path.join(path_file_in_json,folder_name_np,filename_to_open)
+                            f.write(path)
+                        with open ((os.path.join(main_path,"autogenarated_files","open_file_npp.txt")), 'r') as f:
+                            reading = f.read()
+                            replace_things = reading.replace(" ",(" "+(os.path.join(path_file_in_json,folder_name_np)+"/")))
+                        with open ((os.path.join(main_path,'autogenarated_files','open_file_npp.txt')), 'w') as write_file:
+                            write_file.write(replace_things)
+                        data_in_file = open((os.path.join(main_path,'autogenarated_files','open_file_npp.txt')), 'r')
                         reading_data = data_in_file.read().split()
                         count = 0
                         for word in reading_data:
@@ -461,23 +472,23 @@ def subproject(self):
                             if print_or_not == (True):
                                 print("IGNORED {} PSEUDO FILES".format(count))
                             print()        
-                        except: pass                        
+                        except: pass                               
     elif " bf" in input1:
         input_no_spaces = ("".join(input1.split(" ")))
         dir_name = input_no_spaces.replace("bf","")
-        check_bf = os.path.exists(os.path.join(path,dir_name,"bugs&features.docx"))
+        check_bf = os.path.exists(os.path.join(path_file_in_json,dir_name,"bugs&features.docx"))
         if check_bf == (True): 
-            os.startfile(os.path.join(path,dir_name,"bugs&features.docx"))
+            os.startfile(os.path.join(path_file_in_json,dir_name,"bugs&features.docx"))
         else:
             print()
             print("FILE DOES'NT EXISTS")
-            shutil.copyfile((os.path.join(main_path,"autogenarated_files","bugs&features.docx")),(os.path.join(path,dir_name,"bugs&features.docx")))
+            shutil.copyfile((os.path.join(main_path,"autogenarated_files","bugs&features.docx")),(os.path.join(path_file_in_json,dir_name,"bugs&features.docx")))
             print()           
             print("CREATED NEW FILE : bugs&features.docx")
             print() 
-            os.startfile(os.path.join(path,dir_name,"bugs&features.docx"))
+            os.startfile(os.path.join(path_file_in_json,dir_name,"bugs&features.docx"))
     else:
-        a = (os.path.join(path,input1))
+        a = (os.path.join(path_file_in_json,input1))
         check_dir = os.path.isdir(a)
         if check_dir == (True):
             os.startfile(a)
