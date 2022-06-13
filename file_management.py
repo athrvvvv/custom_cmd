@@ -212,16 +212,16 @@ def subproject(self):
     input1 = input("FOLDER / COMMAND: ").lower()
     if (" clean") in input1:
         dir_name = input1.replace(" clean","").strip()
-        initial_path = os.path.join(path,dir_name)
+        initial_path = os.path.join(path_file_in_json,dir_name)
         check_initial = os.path.exists(initial_path)
         if check_initial == (True):
             full_path = os.listdir(initial_path)
-            check_cache = os.path.exists(os.path.join(path,dir_name,"__pycache__"))
+            check_cache = os.path.exists(os.path.join(path_file_in_json,dir_name,"__pycache__"))
             for f in full_path:
                 if f.endswith(".bak"):
                     os.remove(os.path.join(initial_path,f))
             if check_cache == (True):
-                shutil.rmtree(os.path.join(path,dir_name,"__pycache__"))
+                shutil.rmtree(os.path.join(path_file_in_json,dir_name,"__pycache__"))
     elif input1 == (""):
         os.system("start "+path_file_in_json)
     elif input1 == ("q"):
@@ -369,7 +369,7 @@ def subproject(self):
         to_track = input1.replace(' -track','')
         check_to_track = os.path.exists(os.path.join(path,to_track))
         if check_to_track == (False):
-            print(os.path.join(path,to_track) + 'is FALSE DIR')
+            print(os.join(path_file_in_json,to_track) + 'is FALSE DIR')
         else:
             input_to_tarck = open(os.path.join(main_path,'tracker','track_on.txt'),'w')
             input_to_tarck.write(to_track+'.txt')
