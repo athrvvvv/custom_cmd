@@ -63,9 +63,6 @@ def restart_terminal():
     os.startfile(r"C:\Users\athar\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\babu.bat")
     os._exit(0)
 
-def open_current_in_cmd():
-    os.startfile(r"C:\Users\athar\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\babu.bat")
-
 def open_cmd():
     os.system("cmd")
 

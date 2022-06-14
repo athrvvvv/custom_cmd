@@ -104,7 +104,7 @@ while True:
         startfile.restart_terminal()
 
     elif val == ("opcmd"):
-        startfile.open_current_in_cmd()
+        os.startfile(main_path)
 
     elif val == ("cmd"):
         startfile.open_cmd()
