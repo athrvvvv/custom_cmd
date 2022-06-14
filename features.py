@@ -188,7 +188,7 @@ def com(self):
 
 def check_AppConfig():
     yesterday = date.today() - timedelta(days = 1 )
-    imp_code = os.path.exists(os.path.join(main_path.replace("\custom_cmd",""),"imp_code"))
+    imp_code = os.path.exists(os.path.join((os.path.dirname(main_path)),"imp_code"))
     dummy_folder = os.path.exists(os.path.join((os.path.dirname(main_path)),"dummy_folder"))
     appconfig = os.path.exists(os.path.join(main_path,"AppConfiguration.json"))
     path_json = os.path.exists(os.path.join(main_path,"paths.json"))
