@@ -2,8 +2,7 @@ import os, readline, json
 from datetime import datetime
 import WConio2 as input_source
 import docx, docx2txt
-import commands, features
-import tracking_master
+import commands
 import shutil
 doc = docx.Document()
 
@@ -58,11 +57,11 @@ def listdir_word():
             check_dir = os.path.exists(inp)
             if check_dir == (True):
                 change = {"MSWORD":inp}
-                data.update(change)
+                data1.update(change)
                 with open((os.path.join(main_path,"paths.json")),"a") as f:
                     g = open((os.path.join(main_path,"paths.json")),"r+")
                     g.truncate(0)
-                    json.dump(data,f,indent=4)
+                    json.dump(data1,f,indent=4)
                     print()
                     print("This function is made for management of Word documents.")
                     print("Enter a "+'"'+"?"+'" '+"mark to know particular documentation of this function.")
@@ -281,7 +280,8 @@ def subproject(self):
             folder_origin = (path_file_in_json +"/"+folder_name_vs)
             list01 = os.listdir(folder_origin)
             for filename in list01:
-                print(filename)
+                if os.path.isdir(os.path.join(folder_origin,filename)) == (False):
+                    print(filename)
             print()
             completer = MyCompleter(list01)
             readline.set_completer(completer.complete)
@@ -364,16 +364,6 @@ def subproject(self):
                                 print("IGNORED {} PSEUDO FILES".format(count))
                             print()        
                         except: pass                                                           
-    # Track projects shortcut
-    elif (" -track") in input1:
-        to_track = input1.replace(' -track','')
-        check_to_track = os.path.exists(os.path.join(path,to_track))
-        if check_to_track == (False):
-            print(os.join(path_file_in_json,to_track) + 'is FALSE DIR')
-        else:
-            input_to_tarck = open(os.path.join(main_path,'tracker','track_on.txt'),'w')
-            input_to_tarck.write(to_track+'.txt')
-            tracking_master.count_on()
     # OPENS ANY FILES/DIR IN NPP 
     elif (" np") in input1:
         folder_name_np = input1.replace(" np","")

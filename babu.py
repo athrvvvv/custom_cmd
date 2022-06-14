@@ -7,7 +7,6 @@ import commands
 import password_generator
 import features
 import startfile
-import tracking_master 
 import gui_applications 
 import os, readline, re
 
@@ -20,6 +19,7 @@ features.maximize()
 # GREETING
 features.greet_time()
 # LAST VISITED TIME
+# FIX THE CONDITION
 try: features.read_visited_time()
 except: pass
 # WRITING CURRENT TIME
@@ -28,8 +28,6 @@ features.write_time()
 features.visit_counter("count")
 # Count greeting (For only one time a day)
 features.greet()
-# FUNCTIONALITY FOR tracking master
-tracking_master.count_on()
 # TELLING PRIORITY_LIST
 scheduler.check_prio_status()
 # TELLING TODO LIST
@@ -245,22 +243,7 @@ while True:
         
     elif ".com" in val or ".be" in val or ".org" in val:
         features.com(val)
-    
-    elif val == ("status"):
-        tracking_master.tracker_status()
-    
-    elif ("status-") in val :
-        status = val.replace("status-","")
-        if status == ('on') or status == ('off'):
-            tracking_master.status_writer(status)
-            print("Status updated")
-        else:
-            print("You can only set status to ON or OFF")
-            StopIteration()
-            
-    elif val == ('tracker'):
-        tracking_master.tracker()
-    
+ 
     elif "x" in val:
         try:
             answer = inp.replace("x","")
@@ -274,9 +257,6 @@ while True:
     
     elif val == "whatsappp":
         startfile.whatsapp_stable()
-
-    elif val == ("tracker-"):
-        tracking_master.tracker_on()
 
     elif val == ("nmf"):
         file_management.nmf() 
@@ -308,9 +288,6 @@ while True:
     
     elif val == ("start ."):
         os.startfile(main_path)
-    
-    elif val == ("re"):
-        features.reload_babu()
 
     elif val == ("ec"): file_management.subproject(val.upper())
 

@@ -1,6 +1,8 @@
 import random
-import array
-import pyperclip
+import array, json
+import pyperclip, os
+
+main_path = os.path.dirname(__file__)
 
 def password():
     MAX_LEN = 14
@@ -62,12 +64,46 @@ def password():
         if input2 == (""):
             StopIteration()
         else:
-            pyperclip.copy(password)
-            file_path = (r"C:\Users\athar\OneDrive\Documents\PDR\paint.txt")
-            with open(file_path, "a") as np_file:
-                np_file.write(input1+"\n"+input2+"  -  "+password+ "\n")
-
-def get_pass():
-    file = open(r"C:\Users\athar\OneDrive\Documents\PDR\paint.txt","r")
-    print(file.read())
+            try: 
+                with open ((os.path.join(main_path,"paths.json")),"r") as f:
+                    data1 = json.load(f)
+                    dir01 = data1["PAINT_TXT"]
+            except:
+                print("FIRST-TIME WRITING PASSWORD-PATH")
+                with open ((os.path.join(main_path,"paths.json")),"r") as f:
+                    data = json.load(f)
+                change = {"PAINT_TXT":None}
+                data.update(change)
+                with open((os.path.join(main_path,"paths.json")),"a") as f:
+                    g = open((os.path.join(main_path,"paths.json")),"r+")
+                    g.truncate(0)
+                    json.dump(data,f,indent=4)
+            with open ((os.path.join(main_path,"paths.json")),"r") as f:
+                    data1 = json.load(f)
+                    dir01 = data1["PAINT_TXT"]
+            if dir01 == (None):
+                while True:
+                    inp = input("PASTE YOUR SECRET FOLDER PATH (NOT ADMIN PATH): ")
+                    check_dir = os.path.exists(inp)
+                    if check_dir == (True):
+                        change = {"PAINT_TXT":(os.path.join(inp,("paint.txt")))}
+                        data1.update(change)
+                        with open((os.path.join(main_path,"paths.json")),"a") as f:
+                            g = open((os.path.join(main_path,"paths.json")),"r+")
+                            g.truncate(0)
+                            json.dump(data1,f,indent=4)
+                            print()
+                            print("This function is made for management of PASSWORDS :)")
+                            print("Enter a "+'"'+"?"+'" '+"mark to know particular documentation of this function.")
+                            print()
+                            break
+                    else:
+                        print("DIR DOES'NT EXISTS :)")
+        with open ((os.path.join(main_path,"paths.json")),"r") as f:
+            data = json.load(f)
+            dir = data["PAINT_TXT"]
+        pyperclip.copy(password)
+        file_path = (dir)
+        with open(file_path, "a+") as np_file:
+            np_file.write(input1+"\n"+input2+"  -  "+password+ "\n")
 

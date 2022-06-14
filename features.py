@@ -1,4 +1,4 @@
-import os,pygetwindow, time, psutil, json, importlib
+import os,pygetwindow, time, psutil, json, subprocess
 from datetime import datetime, date, timedelta
 import win32gui, win32con, win32api ,keyboard, pyautogui
 main_path = os.path.dirname(__file__)
@@ -188,7 +188,6 @@ def com(self):
 
 def check_AppConfig():
     yesterday = date.today() - timedelta(days = 1 )
-    tracker = os.path.exists(os.path.join(main_path,'tracker'))
     imp_code = os.path.exists(os.path.join(main_path.replace("\custom_cmd",""),"imp_code"))
     dummy_folder = os.path.exists(os.path.join((os.path.dirname(main_path)),"dummy_folder"))
     appconfig = os.path.exists(os.path.join(main_path,"AppConfiguration.json"))
@@ -209,8 +208,6 @@ def check_AppConfig():
         open((os.path.join(main_path,"autogenarated_files","priority_list.txt")),"w").close()
     if check_todo == (False):
         open((os.path.join(main_path,"autogenarated_files","todo.txt")),"w").close()
-    if tracker == (False):
-        os.mkdir(os.path.join(main_path,'tracker'))
         os.system("attrib +h "+ '"' +os.path.join(main_path,'tracker')+'"')
     if imp_code == (False):
         os.mkdir(os.path.join((os.path.dirname(main_path)),"imp_code"))
@@ -218,37 +215,23 @@ def check_AppConfig():
         os.mkdir(os.path.join((os.path.dirname(main_path)),"dummy_folder"))
         os.system("attrib +h "+ '"'+os.path.join(main_path,'dummy_folder')+'"')
     if appconfig == (False):
+        current_network = subprocess.check_output(['netsh', 'wlan', 'show', 'interfaces']).decode('utf-8').split('\n')
+        ssid_line = [x for x in current_network if 'SSID' in x and 'BSSID' not in x]
+        if ssid_line:
+            ssid_list = ssid_line[0].split(':')
+            connected_ssid = ssid_list[1].strip()
         open(os.path.join(main_path,"AppConfiguration.json"),"a").close()
         os.system("attrib +h "+ '"'+os.path.join(main_path,'AppConfiguration.json')+'"')
         dictionary = {
             'version':'v1.0.0',
             'command_history':0,
-            'counter':None,
-            'open_file_npp':None,
             'todo_status':None,
             'prio_status':None,
             'start_time':None,
             'last_time':None,
             'visit_count':0,
-            'visit_yesterday':0,
-            'greet_status':str(yesterday)}
-        json_object = json.dumps(dictionary,indent=4)
-        f = open(os.path.join(main_path,"AppConfiguration.json"),"a")
-        f.write(json_object)
-        f.close()
-    if os.stat(os.path.join(main_path,"AppConfiguration.json")).st_size == 0:
-        dictionary = {
-            'version':'v1.0.0',
-            'command_history':0,
-            'counter':None,
-            'open_file_npp':None,
-            'todo_status':None,
-            'prio_status':None,
-            'start_time':None,
-            'last_time':None,
-            'visit_count':0,
-            'visit_yesterday':0,
-            'greet_status':str(yesterday)}
+            'greet_status':str(yesterday),
+            "SSID":connected_ssid}
         json_object = json.dumps(dictionary,indent=4)
         f = open(os.path.join(main_path,"AppConfiguration.json"),"a")
         f.write(json_object)
@@ -360,7 +343,6 @@ def read_visited_time():
     last_time = y['last_time']
     n = (end_time-start)
     diff_hour = time.strftime("%H", time.gmtime(n))
-    #diff_hour = time.strftime("%H:%M:%S", time.gmtime(n))
     if int(diff_hour) > 0 :
         print("LASTLY VISITED "+diff_hour+" HOURS AGO AT "+last_time)
         print()
@@ -368,13 +350,12 @@ def read_visited_time():
         print("LASTLY VISITED RECENTLY")
 
 def wifi(self):
+    with open(os.path.join(main_path,"AppConfiguration.json")) as file:
+        data = json.load(file)
+        SSID = data["SSID"]
     if " off" in self:
         os.system("netsh wlan disconnect")
     elif " on" in self:
-        os.system("netsh wlan connect name=Nidhi")
+        os.system("netsh wlan connect name="+SSID)
     else:
         print("ONLY ACCEPTS ON OR OFF")  
-
-def reload_babu():
-    import file_management
-    importlib.reload(file_management)
