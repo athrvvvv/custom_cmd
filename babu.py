@@ -164,10 +164,7 @@ while True:
     
     elif val == ("priority list"):
         scheduler.priority_list()
-    
-    elif val == ("documents"):
-        startfile.documents()
-    
+
     elif val == ("quick note"):
         scheduler.quick_note()
     

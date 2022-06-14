@@ -88,9 +88,6 @@ def open_resso():
 def ssf():
     os.startfile(r"C:\Users\athar\OneDrive\Pictures\Screenshots")
 
-def documents():
-    os.system("userinit")
-
 def googlephotos():
     os.system("explorer shell:appsFolder\Brave._crx_ncmjhecbjefahankockkkdmedg")
 
