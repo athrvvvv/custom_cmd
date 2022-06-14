@@ -1,5 +1,7 @@
-import os, sys
+import os, json
 import file_management, cleaner, features
+
+main_path = (os.path.dirname(__file__))
 
 def dn_files():
     os.system("start %userprofile%\Downloads")
@@ -53,15 +55,11 @@ def files():
 def notepad():
     os.system("start notepad")
 
-def note_folder():
-    os.startfile(r"C:\Users\athar\OneDrive\Documents\notes")
-
 def open_word_folder():
-    os.startfile(r"C:\Users\athar\OneDrive\Documents\word_docs")
-    
-def restart_terminal():
-    os.startfile(r"C:\Users\athar\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\babu.bat")
-    os._exit(0)
+    with open ((os.path.join(main_path,"paths.json")),"r") as f:
+        data1 = json.load(f)
+        dir01 = data1["MSWORD"]
+    os.startfile(dir01)
 
 def open_cmd():
     os.system("cmd")
@@ -71,10 +69,6 @@ def open_telegram():
 
 def whatsapp_stable():
     os.system("explorer shell:appsFolder\com.squirrel.WhatsApp.WhatsApp")
-
-def killandstartvs():
-    os.system("taskkill /im Code.exe /f")
-    os.system("code")
 
 def open_opera():
     os.system("start opera")
@@ -95,7 +89,7 @@ def ssf():
     os.startfile(r"C:\Users\athar\OneDrive\Pictures\Screenshots")
 
 def documents():
-    os.system("start " +r"C:\Users\athar\OneDrive\Documents")
+    os.system("userinit")
 
 def googlephotos():
     os.system("explorer shell:appsFolder\Brave._crx_ncmjhecbjefahankockkkdmedg")

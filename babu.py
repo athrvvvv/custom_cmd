@@ -101,10 +101,11 @@ while True:
         file_management.listdir_word()
 
     elif val == ("reopen"):
-        startfile.restart_terminal()
+        os.startfile(os.path.join(main_path,"babu.py"))
+        os._exit(0)
 
     elif val == ("opcmd"):
-        os.startfile(main_path)
+        os.startfile(os.path.join(main_path,"babu.py"))
 
     elif val == ("cmd"):
         startfile.open_cmd()
